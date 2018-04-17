@@ -1,0 +1,122 @@
+#ProfileLeftBar{
+  width: 14%;
+  position: absolute;
+  left: 1%;
+  top: 5%;
+  height: 90%;
+}
+
+#contentPanelProfile_ProfilePicContainer{
+  width: 80%;
+  left: 10%;
+  position: absolute;
+  top: 5%;
+  height: 30%;
+  background-color: #FF3B3F;
+  border-radius: 1rem;
+}
+
+#contentPanelProfile_ProfilePic{
+  border-radius: 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+#contentPanelProfile_ProfileInfo{
+  height: 13%;
+  top: 36%;
+  left: 10%;
+  width: 76%;
+  padding: 2%;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  font-size: 1.5rem;
+  position: absolute;
+}
+
+#contentPanelProfile_ProfileName{
+  width: 100%;
+  height: 45%;
+  top: 5%;
+  position: absolute;
+}
+
+#contentPanelProfile_ProfileAgeSex{
+  width: 100%;
+  height: 45%;
+  top: 50%;
+  display: flex;
+  position: absolute;
+  flex-direction: row;
+}
+
+#contentPanelProfile_ProfileAge{
+  width: 45%;
+  left: 5%;
+  position: absolute;
+  height: 100%;
+  text-align: right;
+}
+
+#contentPanelProfile_ProfileSex{
+  width: 45%;
+  right: 5%;
+  height: 100%;
+  position: absolute;
+  text-align: left;
+}
+/* -------------------------------------------------------------------- */
+
+#ProfileRightBar{
+  width: 18%;
+  position: absolute;
+  right: 1%;
+  top: 5%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+#contentPanelProfile_RightBarLikes,
+#contentPanelProfile_RightBarDates{
+  width: 85%;
+  margin-top: 10%;
+  margin-left: 5%;
+  height: 41%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-style: solid;
+  border-radius: 1rem;
+  border-width: 0.5rem;
+  border-color: #FF3B3F;
+}
+
+/* -------------------------------------------------------------------- */
+#ProfileCenterBar{
+  width: 65%;
+  position: absolute;
+  left: 15%;;
+  top: 5%;
+  height: 90%;
+}
+
+#contentPanelProfile_centerBox{
+  width: 90%;
+  left: 5%;
+  height: 90%;
+  top: 5%;
+  position: absolute;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-style: solid;
+  border-radius: 1rem;
+  border-width: 0.5rem;
+  border-color: #FF3B3F;
+}
+
+.contentPanelProfile_centerBoxTitle{
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 2%;
+}
