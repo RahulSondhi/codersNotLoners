@@ -92,6 +92,18 @@
   border-color: #FF3B3F;
 }
 
+#contentPanelProfile_RightBarLikesTitle,
+#contentPanelProfile_RightBarDatesTitle{
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+#contentPanelProfile_RightBarDatesPendingTitle,
+#contentPanelProfile_RightBarDatesPastTitle{
+  text-align: center;
+  font-size: 1.2rem;
+}
+
 /* -------------------------------------------------------------------- */
 #ProfileCenterBar{
   width: 65%;

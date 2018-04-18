@@ -4,18 +4,23 @@
   <meta charset="UTF-8">
   <title>CodersNotLoners</title>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
   <script src="js/resize.js"></script>
   <script src="js/script.js"></script>
   <link rel="stylesheet" href="css/sky.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/search.css">
 </head>
 
 <body>
   <div id="stage" class="screen">
     <div id="header">
       <div id="navbar">
-        <div></div>
+        <div id="navbarManage" class="navbarItem">Manage</div>
+        <div id="navbarSetting" class="navbarItem">Settings</div>
+        <div id="navbarSearch" class="navbarItem">Search</div>
+        <div id="navbarProfile" class="navbarItem">Profile</div>
       </div>
     </div>
     <div id="content">
@@ -64,7 +69,16 @@
           </div>
         </div>
         <div id="contentPanelSettings"></div>
-        <div id="contentPanelSearch"></div>
+        <div id="contentPanelSearch">
+          <div id="contentPanelSearchSearchbar">
+            <input id="SearchRequest" type="text" name="SearchRequest">
+            <div id="SearchRequestButton">
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
+          <div id="contentPanelSearchFilters"></div>
+          <div id="contentPanelSearchContent"></div>
+        </div>
         <div id="contentPanelDate"></div>
         <div id="contentPanelManage"></div>
       </div>
