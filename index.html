@@ -16,7 +16,8 @@
 <body>
   <div id="stage" class="screen">
     <div id="header">
-      <div id="navbar">
+      <div id="navbar" class="hidden">
+        <div id="navbarLogOut" class="navbarItem">Log Out</div>
         <div id="navbarManage" class="navbarItem">Manage</div>
         <div id="navbarSetting" class="navbarItem">Settings</div>
         <div id="navbarSearch" class="navbarItem">Search</div>
@@ -24,11 +25,17 @@
       </div>
     </div>
     <div id="content">
-      <div id="contentPanel">
+      <div id="logIn">
+        <div id="logInTitle">Log In</div>
+        <div id="logInUserTitle">Username:</div>
+        <input id="logInUsername" type="text" value="Brenna_Berlin">
+        <div id="logInButton">Log In</div>
+      </div>
+      <div id="contentPanel" class="hidden">
         <div id="contentPanelProfile">
           <div id="ProfileLeftBar">
             <div id="contentPanelProfile_ProfilePicContainer">
-              <!-- <img src="" id="contentPanelProfile_ProfilePic"> -->
+              <img src="" id="contentPanelProfile_ProfilePic">
             </div>
             <div id="contentPanelProfile_ProfileInfo">
               <div id="contentPanelProfile_ProfileName">Name</div>
@@ -37,20 +44,21 @@
                 <div id="contentPanelProfile_ProfileSex">N</div>
               </div>
             </div>
+            <div id="contentPanelProfile_Interactions">
+              <div id="contentPanelProfile_InteractionsLike">Like</div>
+              <div id="contentPanelProfile_InteractionsDate">Date</div>
+              <div id="contentPanelProfile_InteractionsRefer">Refer</div>
+            </div>
           </div>
           <div id="ProfileCenterBar">
             <div id="contentPanelProfile_centerBox">
               <div id="contentPanelProfile_centerBoxHobbies">
                 <div id="contentPanelProfile_centerBoxHobbiesTitle" class="contentPanelProfile_centerBoxTitle">Hobbies/Interests</div>
-                <div id="contentPanelProfile_centerBoxHobbiesContent"></div>
+                <div id="contentPanelProfile_centerBoxHobbiesContent" class="contentPanelProfile_centerBoxContent"></div>
               </div>
               <div id="contentPanelProfile_centerBoxCharacteristics">
                 <div id="contentPanelProfile_centerBoxCharacteristicsTitle" class="contentPanelProfile_centerBoxTitle">Characteristics</div>
-                <div id="contentPanelProfile_centerBoxCharacteristicsContent"></div>
-              </div>
-              <div id="contentPanelProfile_centerBoxFavorties">
-                <div id="contentPanelProfile_centerBoxFavortiesTitle" class="contentPanelProfile_centerBoxTitle">Favorites</div>
-                <div id="contentPanelProfile_centerBoxFavortiesContent"></div>
+                <div id="contentPanelProfile_centerBoxCharacteristicsContent" class="contentPanelProfile_centerBoxContent"></div>
               </div>
             </div>
           </div>
@@ -61,10 +69,12 @@
             </div>
             <div id="contentPanelProfile_RightBarDates">
               <div id="contentPanelProfile_RightBarDatesTitle">Dates</div>
-              <div id="contentPanelProfile_RightBarDatesPendingTitle">Pending</div>
-              <div id="contentPanelProfile_RightBarDatesPendingContent"></div>
-              <div id="contentPanelProfile_RightBarDatesPastTitle">Past</div>
-              <div id="contentPanelProfile_RightBarDatesPastContent"></div>
+              <div id="contentPanelProfile_RightBarDatesContainer">
+                <div id="contentPanelProfile_RightBarDatesPendingTitle">Pending</div>
+                <div id="contentPanelProfile_RightBarDatesPendingContent"></div>
+                <div id="contentPanelProfile_RightBarDatesPastTitle">Past</div>
+                <div id="contentPanelProfile_RightBarDatesPastContent"></div>
+              </div>
             </div>
           </div>
         </div>
