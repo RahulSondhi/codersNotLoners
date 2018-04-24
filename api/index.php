@@ -5,7 +5,9 @@ $path = $path[0];
 global $path;
 
 require "$path/api/vendor/autoload.php";
-require "$path/api/getUserInfo.php";
+require "$path/api/base.php";
+require "$path/api/profile.php";
+require "$path/api/search.php";
 
 $app = new \Slim\Slim();
 $body= $app->request()->getBody();
@@ -47,20 +49,10 @@ $app->get('/logout', function(){
   exit;
 });
 
-// $app->get('/getSettings/:teacher/:classes', function ($teacher,$classes){
-//
-//     getSettings($teacher,$classes);
-//     exit;
-//
-// });
-//
-// $app->post('/deleteSurvey/:teacher/:classes', function ($teacher,$classes){
-//     global $body;
-//
-//     deleteSurvey($body,$teacher,$classes);
-//     exit;
-//
-// });
+$app->get('/search/:search', function($search){
+  searchProf($search);
+  exit;
+});
 
 $app->run();
 ?>
