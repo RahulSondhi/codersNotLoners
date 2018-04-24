@@ -1,4 +1,4 @@
-#contentPanelSearchSearchbar{
+#contentPanelSearchSearchbar {
   height: 13%;
   width: 90%;
   left: 5%;
@@ -6,7 +6,7 @@
   position: absolute;
 }
 
-#contentPanelSearchFilters{
+#contentPanelSearchFilters {
   position: absolute;
   height: 73%;
   width: 10%;
@@ -19,7 +19,7 @@
   border-radius: 1rem;
 }
 
-#contentPanelSearchContent{
+#contentPanelSearchContent {
   position: absolute;
   height: 73%;
   width: 78%;
@@ -30,9 +30,11 @@
   border-style: solid;
   border-width: 0.25rem;
   border-radius: 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-#SearchRequest{
+#SearchRequest {
   width: 90%;
   left: 2%;
   top: 20%;
@@ -48,7 +50,7 @@
   border-right: none;
 }
 
-#SearchRequestButton{
+#SearchRequestButton {
   width: 4%;
   height: 41.95%;
   top: 20%;
@@ -66,4 +68,45 @@
   border-style: solid;
   border-width: 0.25rem;
   border-radius: 1rem;
+}
+
+.searchContainer {
+  width: 90%;
+  height: 20%;
+  margin: 1%;
+  margin-left: 5%;
+  display: flex;
+  flex-direction: row;
+  background-color: #EFEFEF;
+  border-radius: 1rem;
+  border-style: solid;
+  border-width: 0.2rem;
+  z-index: 1;
+  border-color: #FF3B3F;
+}
+
+.searchProfPic {
+  padding-top: 1%;
+  height: 90%;
+  width: 10%;
+}
+
+.searchProfName {
+  font-size: 2rem;
+  margin-left: 5%;
+  width: 70%;
+  height: 90%;
+  text-align: center;
+  padding-top: 2%;
+  overflow-x: hidden;
+}
+
+.searchProfAge {
+  font-size: 2rem;
+  margin-left: 5%;
+  width: 10%;
+  height: 90%;
+  text-align: center;
+  padding-top: 2%;
+  overflow-x: hidden;
 }
