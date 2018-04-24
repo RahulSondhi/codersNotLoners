@@ -54,5 +54,10 @@ $app->get('/search/:search', function($search){
   exit;
 });
 
+$app->get('/searchAll', function(){
+  searchAll();
+  exit;
+});
+
 $app->run();
 ?>
