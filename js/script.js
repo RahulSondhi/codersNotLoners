@@ -135,6 +135,7 @@ function updateUrl() {
       $("#contentPanelManage").removeClass("hidden");
       break;
     case "#search":
+      searchProf(parse);
       $("#contentPanelSearch").removeClass("hidden");
       break;
     case "#date":

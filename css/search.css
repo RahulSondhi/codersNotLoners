@@ -110,3 +110,26 @@
   padding-top: 2%;
   overflow-x: hidden;
 }
+
+.filterInput {
+  width: 90%;
+  height: 5%;
+  text-align: center;
+  padding-top: 2%;
+  overflow-x: hidden;
+  margin-left: 5%;
+  margin-bottom: 5%;
+  font-size: 1.25rem;
+}
+
+.filterTitle {
+  width: 90%;
+  height: 7%;
+  text-align: center;
+  padding-top: 2%;
+  overflow-x: hidden;
+  margin-left: 5%;
+  margin-top: 10%;
+  font-size: 1.5rem;
+  text-decoration: underline;
+}
