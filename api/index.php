@@ -49,13 +49,8 @@ $app->get('/logout', function(){
   exit;
 });
 
-$app->get('/search/:search', function($search){
-  searchProf($search);
-  exit;
-});
-
-$app->get('/searchAll', function(){
-  searchAll();
+$app->get('/search/:search/:height/:hair/:hobby/:zip', function($search,$height,$hair,$hobby,$zip){
+  searchProf($search,$height,$hair,$hobby,$zip);
   exit;
 });
 

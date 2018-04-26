@@ -4,6 +4,22 @@ $(function() {
     setSearch()
   });
 
+  $("#HeightRequest").on("change", function(e) {
+    setSearch()
+  });
+
+  $("#HairRequest").on("change", function(e) {
+    setSearch()
+  });
+
+  $("#HobbyRequest").on("change", function(e) {
+    setSearch()
+  });
+
+  $("#ZipRequest").on("change", function(e) {
+    setSearch()
+  });
+
   $("#SearchRequestButton").on("click", function(e) {
     setSearch()
   });
@@ -20,52 +36,66 @@ function setSearch(){
 }
 
 function searchProf(query) {
-  var search = "";
-  var height = "";
-  var hair = "";
-  var hobby = "";
-  var zip = "";
+  var search = "-1";
+  var height = "-1";
+  var hair = "-1";
+  var hobby = "-1";
+  var zip = "-1";
 
   for(var i = 1; i < query.length; i++){
     var parse = query[i].split(":");
     switch(parse[0]){
       case "search":
-        search = parse[1];
+        if(parse[1].replace(/\s/g, '') != ""){
+          search = parse[1];
+        }
         break;
       case "height":
-        height = parse[1];
+        if(parse[1].replace(/\s/g, '') != ""){
+          height = parse[1];
+        }
         break;
       case "hair":
-        hair = parse[1];
+        if(parse[1].replace(/\s/g, '') != ""){
+          hair = parse[1];
+        }
         break;
       case "hobby":
-        hobby = parse[1];
+        if(parse[1].replace(/\s/g, '') != ""){
+          hobby = parse[1];
+        }
         break;
       case "zip":
-        zip = parse[1];
+        if(parse[1].replace(/\s/g, '') != ""){
+          zip = parse[1];
+        }
         break;
     }
   }
 
-  if (search.replace(/\s/g, '') == "") {
-    $.ajax({
-      url: "api/index.php/searchAll"
-    }).done(function(data) {
-      printSearch(JSON.parse(data));
-    })
-  } else {
-    $.ajax({
-      url: "api/index.php/search/" + search
-    }).done(function(data) {
-      printSearch(JSON.parse(data));
-    })
+  $.ajax({
+    url: "api/index.php/search/"+search+"/"+height+"/"+hair+"/"+hobby+"/"+zip
+  }).done(function(data) {
+    printSearch(JSON.parse(data));
+  })
+
+  if(search != "-1"){
+    $("#SearchRequest").val(search);
+  }
+  if(height != "-1"){
+    $("#HeightRequest").val(height);
+  }
+  if(hair != "-1"){
+    $("#HairRequest").val(hair);
   }
 
-  $("#SearchRequest").val(search);
-  $("#HeightRequest").val(height);
-  $("#HairRequest").val(hair);
-  $("#HobbyRequest").val(hobby);
-  $("#ZipRequest").val(zip);
+  if(hobby != "-1"){
+    $("#HobbyRequest").val(hobby);
+  }
+
+  if(zip != "-1"){
+    $("#ZipRequest").val(zip);
+  }
 }
 
 function printSearch(data) {
