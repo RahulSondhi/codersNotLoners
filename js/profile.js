@@ -12,19 +12,48 @@ function loadProfile(name) {
       }).done(function(data3) {
         organizeProfileDates(JSON.parse(data3));
         $("#contentPanelProfile").removeClass("hidden");
-        if(name == "me"){
+        if (name == "me") {
           $("#contentPanelProfile_Interactions").removeClass("hidden");
           $("#contentPanelProfile_InteractionsDate").addClass("NoUsable");
           $("#contentPanelProfile_InteractionsLike").addClass("NoUsable");
           $("#contentPanelProfile_InteractionsRefer").addClass("NoUsable");
-        }else{
+        } else {
           $("#contentPanelProfile_Interactions").removeClass("hidden");
           $("#contentPanelProfile_InteractionsDate").removeClass("NoUsable");
           $("#contentPanelProfile_InteractionsLike").removeClass("NoUsable");
           $("#contentPanelProfile_InteractionsRefer").removeClass("NoUsable");
+          setupProfileButtons(name);
         }
       });
     });
+  });
+}
+
+function setupProfileButtons(name) {
+  $("#contentPanelProfile_InteractionsLike").click(function() {
+    likeProfile(name);
+  });
+}
+
+function likeProfile(name) {
+  $.ajax({
+    url: "api/index.php/likeProfile/" + name
+  }).done(function(data) {
+    if (data == "Like") {
+      $.ajax({
+        url: "api/index.php/getLikes/" + name
+      }).done(function(data2) {
+        organizeProfileLikes(JSON.parse(data2));
+        $("#contentPanelProfile_InteractionsLike").addClass("heart");
+        $("#contentPanelProfile_InteractionsLike").off();
+        $("#contentPanelProfile_InteractionsLike").html("Liked");
+        setTimeout(function() {
+          $("#contentPanelProfile_InteractionsLike").html("Like");
+          $("#contentPanelProfile_InteractionsLike").removeClass("heart");
+          setupProfileButtons(name);
+        }, 5000);
+      });
+    }
   });
 }
 
@@ -42,8 +71,8 @@ function organizeProfile(profData) {
   $("#contentPanelProfile_ProfileAge").html(profData.Age);
   var hobbies = profData.Hobbies.split(",")
   $("#contentPanelProfile_centerBoxHobbiesContent").html("");
-  for(var i =0; i < hobbies.length;i++){
-    $("#contentPanelProfile_centerBoxHobbiesContent").append(hobbies[i]+"<br>");
+  for (var i = 0; i < hobbies.length; i++) {
+    $("#contentPanelProfile_centerBoxHobbiesContent").append(hobbies[i] + "<br>");
   }
   $("#contentPanelProfile_centerBoxCharacteristicsContent").html(
     "Height: " + profData.Height + " feet<br>Hair Color: " + profData.HairColor + "<br>Weight: " + profData.Weight + " lbs"
@@ -52,26 +81,26 @@ function organizeProfile(profData) {
 
 function organizeProfileLikes(likeData) {
   $("#contentPanelProfile_RightBarLikesContent").html("");
-  for(var i = 0;i < likeData.length;i++){
+  for (var i = 0; i < likeData.length; i++) {
     var time = likeData[i].Date_Time.split(" ");
-    var like = "<div class='likeContainer'><div class='likeContainer2'><div class='liker'>"+likeData[i].Liker+"</div><div class='likelike'> -> </div><div class='likee'>"+likeData[i].Likee+"</div></div><div class='likedate'>"+time[0]+" @ "+time[1]+"</div></div>"
+    var like = "<div class='likeContainer'><div class='likeContainer2'><div class='liker'>" + likeData[i].Liker + "</div><div class='likelike'> -> </div><div class='likee'>" + likeData[i].Likee + "</div></div><div class='likedate'>" + time[0] + " @ " + time[1] + "</div></div>"
     $("#contentPanelProfile_RightBarLikesContent").append(like);
   }
 }
 
-function organizeProfileDates(dateData){
+function organizeProfileDates(dateData) {
   $("#contentPanelProfile_RightBarDatesPastContent").html("");
   $("#contentPanelProfile_RightBarDatesPendingContent").html("");
   var time = new Date();
   var prev = [];
   var future = [];
-  for (var i = 0;i<dateData.length;i++){
+  for (var i = 0; i < dateData.length; i++) {
     var datetime = dateData[i].Date_Time.split(" ");
-    var date = "<div class='profdateContainer' onclick='{window.location.hash = "+'"'+"date-"+dateData[i].Profile1+"-"+dateData[i].Profile2+"-"+dateData[i].Date_Time+'"'+"; updateUrl();}'><div class='profdateContainer2'><div class='profdateprofile1'>"+dateData[i].Profile1+"</div><div class='profdatedates'> + </div><div class='profdateprofile2'>"+dateData[i].Profile2+"</div></div><div class='profdatedate'>"+datetime[0]+" @ "+datetime[1]+"</div></div>"
+    var date = "<div class='profdateContainer' onclick='{window.location.hash = " + '"' + "date-" + dateData[i].Profile1 + "-" + dateData[i].Profile2 + "-" + dateData[i].Date_Time + '"' + "; updateUrl();}'><div class='profdateContainer2'><div class='profdateprofile1'>" + dateData[i].Profile1 + "</div><div class='profdatedates'> + </div><div class='profdateprofile2'>" + dateData[i].Profile2 + "</div></div><div class='profdatedate'>" + datetime[0] + " @ " + datetime[1] + "</div></div>"
 
-    if(Date.parse(time) > Date.parse(dateData[i].Date_Time)){
+    if (Date.parse(time) > Date.parse(dateData[i].Date_Time)) {
       $("#contentPanelProfile_RightBarDatesPastContent").append(date);
-    }else{
+    } else {
       $("#contentPanelProfile_RightBarDatesPendingContent").append(date);
     }
   }
