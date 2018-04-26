@@ -54,5 +54,10 @@ $app->get('/search/:search/:height/:hair/:hobby/:zip', function($search,$height,
   exit;
 });
 
+$app->get('/likeProfile/:likee', function($likee){
+  likeProfile($likee);
+  exit;
+});
+
 $app->run();
 ?>

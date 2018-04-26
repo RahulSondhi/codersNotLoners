@@ -87,4 +87,23 @@ function getDates($profile){
 
   print_r(JSON_encode($info));
 }
+
+function likeProfile($likee){
+  include("start.php");
+  session_start();
+
+  if($likee == $_SESSION['username']){
+    print_r("N/A");
+  }else{
+    $name = $_SESSION['username'];
+    $date = gmdate('Y-m-d h:i:s \G\M\T');
+    $sql="INSERT INTO Likes VALUES ('$name', '$likee', CURRENT_TIMESTAMP);";
+
+    if ($conn->query($sql) === TRUE) {
+      echo "Like";
+    } else {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+  }
+}
 ?>
