@@ -190,7 +190,7 @@ function updateUrl() {
             $("#listAllUsers").removeClass("hidden");
             break;
         case "#searchEmployee":
-            $("#searchEmployee").removeClass("hidden");
+            $("#editEmployeePage").removeClass("hidden");
             break;
         case "#searchDate":
             $("#searchDate").removeClass("hidden");
