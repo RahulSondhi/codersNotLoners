@@ -1,28 +1,28 @@
-$(function() {
+$(function () {
 
-  $("#SearchRequest").on("change", function(e) {
-    setSearch()
-  });
+    $("#SearchRequest").on("change", function (e) {
+        setSearch()
+    });
 
-  $("#HeightRequest").on("change", function(e) {
-    setSearch()
-  });
+    $("#HeightRequest").on("change", function (e) {
+        setSearch()
+    });
 
-  $("#HairRequest").on("change", function(e) {
-    setSearch()
-  });
+    $("#HairRequest").on("change", function (e) {
+        setSearch()
+    });
 
-  $("#HobbyRequest").on("change", function(e) {
-    setSearch()
-  });
+    $("#HobbyRequest").on("change", function (e) {
+        setSearch()
+    });
 
-  $("#ZipRequest").on("change", function(e) {
-    setSearch()
-  });
+    $("#ZipRequest").on("change", function (e) {
+        setSearch()
+    });
 
-  $("#SearchRequestButton").on("click", function(e) {
-    setSearch()
-  });
+    $("#SearchRequestButton").on("click", function (e) {
+        setSearch()
+    });
 });
 
 function setSearch() {
@@ -32,15 +32,15 @@ function setSearch() {
   var hobby = $("#HobbyRequest").val();
   var zip = $("#ZipRequest").val();
 
-  window.location.hash = "search-search:" + search + "-height:" + height + "-hair:" + hair + "-hobby:" + hobby + "-zip:" + zip;
+    window.location.hash = "search-search:" + search + "-height:" + height + "-hair:" + hair + "-hobby:" + hobby + "-zip:" + zip;
 }
 
 function searchProf(query) {
-  var search = "-1";
-  var height = "-1";
-  var hair = "-1";
-  var hobby = "-1";
-  var zip = "-1";
+    var search = "-1";
+    var height = "-1";
+    var hair = "-1";
+    var hobby = "-1";
+    var zip = "-1";
 
   for (var i = 1; i < query.length; i++) {
     var parse = query[i].split(":");
@@ -71,7 +71,6 @@ function searchProf(query) {
         }
         break;
     }
-  }
 
   $.ajax({
     url: "api/index.php/search/" + search + "/" + height + "/" + hair + "/" + hobby + "/" + zip
@@ -152,17 +151,17 @@ function printSearch(data) {
 }
 
 function searchFits(current, search) {
-  if (current.ProfileID == search.ProfileID) {
-    return false;
-  }
+    if (current.ProfileID == search.ProfileID) {
+        return false;
+    }
 
-  if (search.Age < current.DatingAgeRangeStart) {
-    return false;
-  }
+    if (search.Age < current.DatingAgeRangeStart) {
+        return false;
+    }
 
-  if (search.Age > current.DatingAgeRangeEnd) {
-    return false;
-  }
+    if (search.Age > current.DatingAgeRangeEnd) {
+        return false;
+    }
 
-  return true;
+    return true;
 }

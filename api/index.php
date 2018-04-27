@@ -8,6 +8,7 @@ require "$path/api/vendor/autoload.php";
 require "$path/api/base.php";
 require "$path/api/profile.php";
 require "$path/api/search.php";
+require "$path/api/manage.php";
 
 $app = new \Slim\Slim();
 $body= $app->request()->getBody();
@@ -74,6 +75,11 @@ $app->get('/getProfiles', function(){
 $app->get('/getPermission', function(){
   getPermission();
   exit;
+});
+
+$app->get('/getSalesReport/:month/:year', function($month,$year){
+    getSalesReport($month,$year);
+    exit;
 });
 
 $app->run();
