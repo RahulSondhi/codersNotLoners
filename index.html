@@ -1,21 +1,22 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>CodersNotLoners</title>
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-  <script src="js/resize.js"></script>
-  <script src="js/search.js"></script>
-  <script src="js/profile.js"></script>
-  <script src="js/script.js"></script>
-  <link rel="stylesheet" href="css/sky.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/profile.css">
-  <link rel="stylesheet" href="css/search.css">
+    <meta charset="UTF-8">
+    <title>CodersNotLoners</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <script src="js/resize.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="css/sky.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/search.css">
 </head>
 
 <body>
+<<<<<<< HEAD
   <div id="stage" class="screen">
     <div id="header">
       <div id="navbar" class="hidden">
@@ -71,69 +72,141 @@
                 <div id="contentPanelProfile_centerBoxCharacteristicsTitle" class="contentPanelProfile_centerBoxTitle">Characteristics</div>
                 <div id="contentPanelProfile_centerBoxCharacteristicsContent" class="contentPanelProfile_centerBoxContent"></div>
               </div>
+=======
+    <div id="stage" class="screen">
+        <div id="header">
+            <div id="navbar" class="hidden">
+                <div id="navbarLogOut" class="navbarItem">Log Out</div>
+                <div id="navbarManage" class="navbarItem">Manage</div>
+                <div id="navbarSetting" class="navbarItem">Settings</div>
+                <div id="navbarSearch" class="navbarItem">Search</div>
+                <div id="navbarProfile" class="navbarItem">Profile</div>
+>>>>>>> c69b46f3fa33aa7faf1ecc8b01f621b35126baec
             </div>
-          </div>
-          <div id="ProfileRightBar">
-            <div id="contentPanelProfile_RightBarLikes">
-              <div id="contentPanelProfile_RightBarLikesTitle">Likes</div>
-              <div id="contentPanelProfile_RightBarLikesContent"></div>
-            </div>
-            <div id="contentPanelProfile_RightBarDates">
-              <div id="contentPanelProfile_RightBarDatesTitle">Dates</div>
-              <div id="contentPanelProfile_RightBarDatesContainer">
-                <div id="contentPanelProfile_RightBarDatesPendingTitle">Pending</div>
-                <div id="contentPanelProfile_RightBarDatesPendingContent"></div>
-                <div id="contentPanelProfile_RightBarDatesPastTitle">Past</div>
-                <div id="contentPanelProfile_RightBarDatesPastContent"></div>
-              </div>
-            </div>
-          </div>
         </div>
-        <div id="contentPanelSettings"></div>
-        <div id="contentPanelSearch">
-          <div id="contentPanelSearchSearchbar">
-            <input id="SearchRequest" type="text" name="SearchRequest">
-            <div id="SearchRequestButton">
-              <i class="fas fa-search"></i>
+        <div id="content">
+            <div id="logIn">
+                <div id="logInTitle">Log In</div>
+                <div id="logInUserTitle">Username:</div>
+                <input id="logInUsername" type="text" value="DesiraeBerg">
+                <div id="logInButton">Log In</div>
             </div>
-          </div>
-          <div id="contentPanelSearchFilters">
-            <div id="contentPanelSearchFiltersContainer">
-              <div class="filterTitle">Height</div>
-              <input id="HeightRequest" class="filterInput" type="text" name="HeightRequest">
-              <div class="filterTitle">Hair Color</div>
-              <input id="HairRequest" class="filterInput" type="text" name="HairRequest">
-              <div class="filterTitle">Hobbies</div>
-              <input id="HobbyRequest" class="filterInput" type="text" name="HobbyRequest">
-              <div class="filterTitle">Zip Code</div>
-              <input id="ZipRequest" class="filterInput" type="text" name="ZipRequest">
-            </div>
-          </div>
-          <div id="contentPanelSearchContent"></div>
-        </div>
-        <div id="contentPanelDate"></div>
-        <div id="contentPanelManage">
-          <div id="editEmployeeLabel"> Edit Employee</div>
-          <div id="employeeSSNInputLabel"> SSN </div>
-          <input id="employeeSSNInput" type="text" name="SSNEmployeeInput">
+            <div id="contentPanel" class="hidden">
+                <div id="contentPanelProfile">
+                    <div id="ProfileLeftBar">
+                        <div id="contentPanelProfile_ProfilePicContainer">
+                            <img src="" id="contentPanelProfile_ProfilePic">
+                        </div>
+                        <div id="contentPanelProfile_ProfileInfo">
+                            <div id="contentPanelProfile_ProfileName">Name</div>
+                            <div id="contentPanelProfile_ProfileAgeSex">
+                                <div id="contentPanelProfile_ProfileAge">21</div>
+                                <div id="contentPanelProfile_ProfileSex">N</div>
+                            </div>
+                        </div>
+                        <div id="contentPanelProfile_Interactions">
+                            <div id="contentPanelProfile_InteractionsLike">Like</div>
+                            <div id="contentPanelProfile_InteractionsDate">Date</div>
+                            <div id="contentPanelProfile_InteractionsRefer">Refer</div>
+                        </div>
+                    </div>
+                    <div id="ProfileCenterBar">
+                        <div id="contentPanelProfile_centerBox">
+                            <div id="contentPanelProfile_centerBoxHobbies">
+                                <div id="contentPanelProfile_centerBoxHobbiesTitle" class="contentPanelProfile_centerBoxTitle">Hobbies/Interests</div>
+                                <div id="contentPanelProfile_centerBoxHobbiesContent" class="contentPanelProfile_centerBoxContent"></div>
+                            </div>
+                            <div id="contentPanelProfile_centerBoxCharacteristics">
+                                <div id="contentPanelProfile_centerBoxCharacteristicsTitle" class="contentPanelProfile_centerBoxTitle">Characteristics</div>
+                                <div id="contentPanelProfile_centerBoxCharacteristicsContent" class="contentPanelProfile_centerBoxContent"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ProfileRightBar">
+                        <div id="contentPanelProfile_RightBarLikes">
+                            <div id="contentPanelProfile_RightBarLikesTitle">Likes</div>
+                            <div id="contentPanelProfile_RightBarLikesContent"></div>
+                        </div>
+                        <div id="contentPanelProfile_RightBarDates">
+                            <div id="contentPanelProfile_RightBarDatesTitle">Dates</div>
+                            <div id="contentPanelProfile_RightBarDatesContainer">
+                                <div id="contentPanelProfile_RightBarDatesPendingTitle">Pending</div>
+                                <div id="contentPanelProfile_RightBarDatesPendingContent"></div>
+                                <div id="contentPanelProfile_RightBarDatesPastTitle">Past</div>
+                                <div id="contentPanelProfile_RightBarDatesPastContent"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="contentPanelSettings"></div>
+                <div id="contentPanelSearch">
+                    <div id="contentPanelSearchSearchbar">
+                        <input id="SearchRequest" type="text" name="SearchRequest">
+                        <div id="SearchRequestButton">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    <div id="contentPanelSearchFilters">
+                        <div id="contentPanelSearchFiltersContainer">
+                            <div class="filterTitle">Height</div>
+                            <input id="HeightRequest" class="filterInput" type="text" name="HeightRequest">
+                            <div class="filterTitle">Hair Color</div>
+                            <input id="HairRequest" class="filterInput" type="text" name="HairRequest">
+                            <div class="filterTitle">Hobbies</div>
+                            <input id="HobbyRequest" class="filterInput" type="text" name="HobbyRequest">
+                            <div class="filterTitle">Zip Code</div>
+                            <input id="ZipRequest" class="filterInput" type="text" name="ZipRequest">
+                        </div>
+                    </div>
+                    <div id="contentPanelSearchContent"></div>
+                </div>
+                <div id="contentPanelDate"></div>
+                <div id="contentPanelManage">
 
-          <div id="employeePasswordInputLabel"> Password </div>
-          <input id="employeePasswordInput" type="password" name="employeePasswordInput">
+                    <button id="getSalesReportButton" type="button"> Get Sales report </button>
+                    <button id="listAllUsersButton" type="button"> List All Users </button>
+                    <button id="searchEmployeeButton" type="button"> Search Employee </button>
+                    <button id="searchDateButton" type="button"> Search Date </button>
+                    <button id="searchRevenueGeneratedButton" type="button"> Search Revenue Generated</button>
+                    <button id="employeeMostRevenueButton" type="button"> Employee that generated the most revenue </button>
+                    <button id="peopleWhoHaveGoneOutWithButton" type="button"> People who have gone out with a specific person </button>
 
-          <div id="employeeFirstNameInputLabel"> First Name</div>
-          <input id="employeeFirstNameInput" type="text" name="employeeFirstNameInput">
+                </div>
 
-          <div id="employeeLastNameInputLabel"> Last Name</div>
-          <input id="employeeLastNameInput" type="text" name="employeeLastNameInput">
+                <div id="getSalesReport"> </div>
+                <div id="listAllUsers"> </div>
+                <div id="searchEmployee"> </div>
+                <div id="searchDate"> </div>
+                <div id="searchRevenueGenerated"> </div>
+                <div id="employeeMostRevenue"> </div>
+                <div id="peopleWhoHaveGoneOutWith"> </div>
 
-          <div id="employeeStreetInputLabel"> Street</div>
-          <input id="employeeStreetInput" type="text" name="employeeStreetInput">
+                <div id="editEmployeePage">
+                    <div id="editEmployeeLabel"> Edit Employee</div>
 
-          <div id="employeeCityInputLabel"> City</div>
-          <input id="employeeCityInput" type="text" name="employeeCityInput">
+                    <button id="deleteEmployeeButton"> Delete </button>
 
-          <div id="employeeStateInputLabel"> State</div>
-          <select>
+                    <div id="employeeSSNInputLabel"> SSN </div>
+                    <input id="employeeSSNInput" type="text" name="SSNEmployeeInput">
+
+                    <div id="employeePasswordInputLabel"> Password </div>
+                    <input id="employeePasswordInput" type="password" name="employeePasswordInput">
+
+                    <div id="employeeFirstNameInputLabel"> First Name</div>
+                    <input id="employeeFirstNameInput" type="text" name="employeeFirstNameInput">
+
+                    <div id="employeeLastNameInputLabel"> Last Name</div>
+                    <input id="employeeLastNameInput" type="text" name="employeeLastNameInput">
+
+                    <div id="employeeStreetInputLabel"> Street</div>
+                    <input id="employeeStreetInput" type="text" name="employeeStreetInput">
+
+                    <div id="employeeCityInputLabel"> City</div>
+                    <input id="employeeCityInput" type="text" name="employeeCityInput">
+
+                    <div id="employeeStateInputLabel"> State</div>
+
+                    <select>
             <option value="Alabama"> AL </option>
             <option value="Arkansas"> AK </option>
             <option value="Arizona"> AZ </option>
@@ -186,30 +259,30 @@
             <option value="Wyoming"> WY </option>
             </select>
 
-          <div id="employeeZIPInputLabel"> ZIP</div>
-          <input id="employeeZIPZnput" type="number" name="employeeZIPInput">
+                    <div id="employeeZIPInputLabel"> ZIP</div>
+                    <input id="employeeZIPZnput" type="number" name="employeeZIPInput">
 
-          <div id="employeeEmailInputLabel"> Email</div>
-          <input id="employeeEmailInput" type="email" name="employeeEmailInput">
+                    <div id="employeeEmailInputLabel"> Email</div>
+                    <input id="employeeEmailInput" type="email" name="employeeEmailInput">
 
-          <div id="employeeTelephoneInputLabel"> Telephone Number </div>
-          <input id="employeeTelephoneInput" type="tel" name="employeeTelephoneInput">
+                    <div id="employeeTelephoneInputLabel"> Telephone Number </div>
+                    <input id="employeeTelephoneInput" type="tel" name="employeeTelephoneInput">
 
-          <div id="employeeJobRoleInputLabel"> Job Role</div>
-          <input id="employeeJobRoleInput" type="text" name="employeeJobRoleInput">
+                    <div id="employeeJobRoleInputLabel"> Job Role</div>
+                    <input id="employeeJobRoleInput" type="text" name="employeeJobRoleInput">
 
-          <div id="employeeStartRateInputLabel"> Start Rate</div>
-          <input id="employeeStartRateInput" type="number" name="employeeStartRateInput">
+                    <div id="employeeStartRateInputLabel"> Start Rate</div>
+                    <input id="employeeStartRateInput" type="number" name="employeeStartRateInput">
 
-          <div id="employeeHourlyRateInputLabel"> Hourly Rate</div>
-          <input id="employeeHourlyRateInput" type="text" name="employeeHourlyRateInput">
+                    <div id="employeeHourlyRateInputLabel"> Hourly Rate</div>
+                    <input id="employeeHourlyRateInput" type="text" name="employeeHourlyRateInput">
 
+                </div>
+            </div>
+            <div id="city"><img src="media/city.svg" id="cityImg"></div>
         </div>
-      </div>
-      <div id="city"><img src="media/city.svg" id="cityImg"></div>
+        <div id="footer"></div>
     </div>
-    <div id="footer"></div>
-  </div>
 </body>
 
 </html>
