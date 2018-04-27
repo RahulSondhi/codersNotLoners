@@ -115,11 +115,13 @@
   width: 90%;
   height: 6.5%;
   text-align: center;
+  padding: 0;
   padding-top: 2%;
   overflow-x: hidden;
   margin-left: 5%;
   margin-bottom: 5%;
   font-size: 1.25rem;
+  border-width: 0.1rem;
 }
 
 .filterTitle {

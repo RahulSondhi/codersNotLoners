@@ -41,9 +41,6 @@ function initLogIn() {
         } else {
           if(banana == "customer"){
             openProfileSelection();
-            // unhideNav(false);
-            // window.location.hash = "profile";
-            // updateUrl();
           }else{
             unhideNav(true);
             window.location.hash = "manage";
@@ -245,30 +242,6 @@ function updateUrl() {
             break;
         case "#setting":
             $("#contentPanelSettings").removeClass("hidden")
-            break;
-        case "#editEmployeePage":
-            $("#editEmployeePage").removeClass("hidden");
-            break;
-        case "#getSalesReport":
-            $("#getSalesReport").removeClass("hidden");
-            break;
-        case "#listAllUsers":
-            $("#listAllUsers").removeClass("hidden");
-            break;
-        case "#searchEmployee":
-            $("#searchEmployee").removeClass("hidden");
-            break;
-        case "#searchDate":
-            $("#searchDate").removeClass("hidden");
-            break;
-        case "#searchRevenueGenerated":
-            $("#searchRevenueGenerated").removeClass("hidden");
-            break;
-        case "#employeeMostRevenue":
-            $("#employeeMostRevenue").removeClass("hidden");
-            break;
-        case "#peopleWhoHaveGoneOutWith":
-            $("#peopleWhoHaveGoneOutWith").removeClass("hidden");
             break;
         case "#profile":
             if (parse[1]) {

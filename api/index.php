@@ -71,5 +71,10 @@ $app->get('/getProfiles', function(){
   exit;
 });
 
+$app->get('/getPermission', function(){
+  getPermission();
+  exit;
+});
+
 $app->run();
 ?>
