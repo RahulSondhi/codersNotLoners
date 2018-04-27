@@ -24,6 +24,13 @@ $app->post('/login', function(){
   exit;
 });
 
+$app->post('/loginProfile', function(){
+  global $body;
+
+  loginProfile($body);
+  exit;
+});
+
 $app->get('/getProfile/:profile', function($profile){
   getProfile($profile);
   exit;
@@ -56,6 +63,11 @@ $app->get('/search/:search/:height/:hair/:hobby/:zip', function($search,$height,
 
 $app->get('/likeProfile/:likee', function($likee){
   likeProfile($likee);
+  exit;
+});
+
+$app->get('/getProfiles', function(){
+  getProfiles();
   exit;
 });
 

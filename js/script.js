@@ -28,25 +28,83 @@ function initLogIn() {
     if ($("#logInUsername").val()){
       var toSend = {};
       toSend.username = $("#logInUsername").val();
-
+      toSend.password = $("#logInPassword").val();
       $.ajax({
         type: "post",
         url: "api/index.php/login",
         data: JSON.stringify(toSend),
         dataType: "json"
       }).done(function(banana) {
-        if (banana == true) {
-          console.log("Valid");
-          unhideNav();
-          window.location.hash = "profile";
-          updateUrl();
-        } else {
+        if (banana == false){
           console.log("Unvalid")
+        } else {
+          if(banana == "customer"){
+            openProfileSelection();
+            // unhideNav(false);
+            // window.location.hash = "profile";
+            // updateUrl();
+          }else{
+            unhideNav(true);
+            window.location.hash = "manage";
+            updateUrl();
+          }
         }
       });
     }
+
   });
 
+}
+
+function redoLogin(){
+  $("#logInTitle").html("Log In");
+  $("#logInHolder").removeClass("hidden");
+  $("#profileLogInHolder").addClass("hidden");
+}
+
+function openProfileSelection(){
+  $("#profileLogInHolder").html(" ");
+  $.ajax({
+    url: "api/index.php/getProfiles"
+  }).done(function(data) {
+      $("#logInTitle").html("Profiles");
+      $("#logInHolder").addClass("hidden");
+      $("#profileLogInHolder").removeClass("hidden");
+
+      var profiles = JSON.parse(data);
+      for(var i = 0; i < profiles.length; i++){
+        var photo = "";
+        if (profiles[i].M_F == "Male") {
+          photo = "media/men.svg";
+        } else {
+          photo = "media/women.svg";
+        }
+        var hi = profiles[i].ProfileID;
+        var profile = "<div class='profileLogIn' onclick='{logInProfile("+'"'+hi+'"'+")}'><img src='"+photo+"' class='profileLogInPhoto'><div class='profileLogInName'>"+profiles[i].ProfileID+"</div></div>";
+        $("#profileLogInHolder").append(profile);
+      }
+      $("#profileLogInHolder").append("<div class='profileLogIn'><img src='media/add.svg' class='profileLogInPhotoADD'><div class='profileLogInName'>"+"New Account"+"</div></div>");
+
+  });
+}
+
+function logInProfile(profile){
+  var toSend = {};
+  toSend.username = profile;
+  $.ajax({
+    type: "post",
+    url: "api/index.php/loginProfile",
+    data: JSON.stringify(toSend),
+    dataType: "json"
+  }).done(function(banana) {
+    if (banana == false){
+      console.log("Unvalid")
+    } else {
+        unhideNav(false);
+        window.location.hash = "profile";
+        updateUrl();
+    }
+  });
 }
 
 function reloadUpdate() {
@@ -55,6 +113,7 @@ function reloadUpdate() {
     url: "api/index.php/loggedin"
   }).done(function(data) {
     console.log(data);
+    redoLogin();
     if (data == 1) {
       if (window.location.hash == "" || window.location.hash == "#") {
         hideAllPages();
@@ -70,9 +129,16 @@ function reloadUpdate() {
 
 }
 
-function unhideNav() {
+function unhideNav(admin) {
   $("#contentPanel").removeClass("hidden");
   $("#navbar").removeClass("hidden");
+
+  if(admin){
+    $("#navbarProfile").addClass("hidden");
+  }else{
+    $("#navbarManage").addClass("hidden");
+  }
+
   $("#logIn").addClass("hidden");
 }
 
