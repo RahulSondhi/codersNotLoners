@@ -2,7 +2,7 @@
 
 $path = explode("/api", dirname($_SERVER['SCRIPT_FILENAME']));
 $path = $path[0];
-global $path; 
+global $path;
 
 require "$path/api/vendor/autoload.php";
 require "$path/api/base.php";
