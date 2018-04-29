@@ -6,6 +6,7 @@
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
   <script src="js/resize.js"></script>
+  <script src="js/date.js"></script>
   <script src="js/search.js"></script>
   <script src="js/profile.js"></script>
   <script src="js/script.js"></script>
@@ -13,6 +14,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/date.css">
 </head>
 
 <body>
@@ -31,11 +33,11 @@
         <div id="logInTitle">Log In</div>
         <div id="logInHolder">
           <div id="logInUserTitle">SSN:</div>
-          <!-- <input id="logInUsername" type="text" value="666-66-6666"> -->
-          <input id="logInUsername" type="text" value="111-11-1111">
+          <input id="logInUsername" type="text" value="666-66-6666">
+          <!-- <input id="logInUsername" type="text" value="111-11-1111"> -->
           <div id="logInPasswordTitle">Password:</div>
-          <!-- <input id="logInPassword" type="password" value="666@66"> -->
-          <input id="logInPassword" type="password" value="111@11">
+          <input id="logInPassword" type="password" value="666@66">
+          <!-- <input id="logInPassword" type="password" value="111@11"> -->
           <div id="logInButton">Log In</div>
         </div>
         <div id="profileLogInHolder" class="hidden">
@@ -111,7 +113,23 @@
           </div>
           <div id="contentPanelSearchContent"></div>
         </div>
-        <div id="contentPanelDate"></div>
+        <div id="contentPanelDate">
+          <div id="DateTitle">Date Info</div>
+          <div id="dateInfoContainer">
+            <div id="DateProfile1"></div>
+            <div id="DateProfile2"></div>
+            <div id="DateCustRep"></div>
+            <div id="DateLocation"></div>
+            <div id="DateTiming"></div>
+            <div id="DateBookingFee"></div>
+            <div id="DateRatingPerson1"></div>
+            <div id="DateRatingPerson2"></div>
+          </div>
+          <div id="DateComments">
+            <div id="DateCommentsContent"></div>
+            <input id="DateCommentsComment" type="text">
+          </div>
+        </div>
         <div id="contentPanelManage">
 
           <button id="getSalesReportButton" type="button"> Get Sales report </button>

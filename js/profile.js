@@ -58,7 +58,6 @@ function likeProfile(name) {
 }
 
 function organizeProfile(profData) {
-  console.log(profData);
   if (profData.M_F == "Male") {
     $("#contentPanelProfile_ProfileSex").html("/M");
     $("#contentPanelProfile_ProfilePic").attr("src", "media/men.svg");
