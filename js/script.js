@@ -17,7 +17,6 @@ function startEmUp() {
         console.log(data);
         setSky();
         setNavbar();
-        setManagementPages();
         reloadUpdate();
         initLogIn();
     })
@@ -184,37 +183,6 @@ function setNavbar() {
     });
 }
 
-function setManagementPages() {
-    $("#getSalesReportButton").click(function () {
-        window.location.hash = "getSalesReport";
-        updateUrl();
-    });
-    $("#listAllUsersButton").click(function () {
-        window.location.hash = "listAllUsers";
-        updateUrl();
-    });
-    $("#searchEmployeeButton").click(function () {
-        window.location.hash = "searchEmployee";
-        updateUrl();
-    });
-    $("#searchDateButton").click(function () {
-        window.location.hash = "searchDate";
-        updateUrl();
-    });
-    $("#searchRevenueGeneratedButton").click(function () {
-        window.location.hash = "searchRevenueGenerated";
-        updateUrl();
-    });
-    $("#employeeMostRevenueButton").click(function () {
-        window.location.hash = "employeeMostRevenue";
-        updateUrl();
-    });
-    $("#peopleWhoHaveGoneOutWithButton").click(function () {
-        window.location.hash = "peopleWhoHaveGoneOutWith";
-        updateUrl();
-    });
-}
-
 
 function logout() {
     $.ajax({
@@ -238,6 +206,7 @@ function updateUrl() {
             $("#contentPanelSearch").removeClass("hidden");
             break;
         case "#date":
+            loadDate();
             $("#contentPanelDate").removeClass("hidden");
             break;
         case "#setting":

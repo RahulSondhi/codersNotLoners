@@ -1,0 +1,146 @@
+#DateTitle {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  padding-top: 3%;
+  width: 30%;
+  height: 20%;
+  font-size: 3rem;
+  text-align: center;
+}
+
+#DateProfile1 {
+  position: absolute;
+  top: 5%;
+  left: 3%;
+  width: 80%;
+  height: 7%;
+  font-size: 1.5rem;
+  overflow-x: hidden;
+}
+
+#DateProfile2 {
+  position: absolute;
+  top: 15%;
+  left: 3%;
+  width: 80%;
+  height: 7%;
+  font-size: 1.5rem;
+  overflow-x: hidden;
+}
+
+#DateCustRep {
+  position: absolute;
+  top: 35%;
+  left: 3%;
+  width: 80%;
+  height: 7%;
+  font-size: 1.5rem;
+  overflow-x: hidden;
+}
+
+#DateLocation {
+  position: absolute;
+  top: 43%;
+  left: 3%;
+  width: 80%;
+  height: 7%;
+  font-size: 1.5rem;
+  overflow-x: hidden;
+}
+
+#DateTiming {
+  position: absolute;
+  top: 51%;
+  left: 3%;
+  width: 80%;
+  height: 7%;
+  font-size: 1.5rem;
+  overflow-x: hidden;
+}
+
+#DateBookingFee {
+  position: absolute;
+  top: 59%;
+  left: 3%;
+  width: 80%;
+  height: 7%;
+  font-size: 1.5rem;
+  overflow-x: hidden;
+}
+
+#DateRatingPerson1 {
+  position: absolute;
+  top: 67%;
+  left: 3%;
+  width: 80%;
+  height: 7%;
+  font-size: 1.5rem;
+  overflow-x: hidden;
+}
+
+#DateRatingPerson2 {
+  position: absolute;
+  top: 75%;
+  left: 3%;
+  width: 80%;
+  height: 7%;
+  font-size: 1.5rem;
+  overflow-x: hidden;
+}
+
+#dateInfoContainer {
+  background-color: #EFEFEF;
+  border-radius: 1rem;
+  border-style: solid;
+  border-width: 0.5rem;
+  z-index: 1;
+  border-color: #FF3B3F;
+  width: 30%;
+  left: 5%;
+  top: 28%;
+  height: 62%;
+  position: absolute;
+}
+
+#DateComments {
+  background-color: #FF3B3F;
+  border-radius: 1rem;
+  border-style: solid;
+  border-width: 0.5rem;
+  z-index: 1;
+  border-color: #FF3B3F;
+  color: white;
+  width: 44%;
+  right: 3%;
+  height: 90%;
+  position: absolute;
+  top: 5%;
+}
+
+#DateCommentsContent {
+  width: 90%;
+  left: 5%;
+  top: 2%;
+  position: absolute;
+  height: 85%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#DateCommentsComment {
+  border-radius: 1rem;
+  padding: 0;
+  border-width: 0;
+  width: 100%;
+  bottom: 2%;
+  position: absolute;
+  font-size: 2rem;
+}
+
+.comment {
+  font-size: 1.5rem;
+  width: 96%;
+  height: 6%;
+  margin: 2%;
+}

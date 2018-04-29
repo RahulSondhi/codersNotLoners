@@ -99,13 +99,12 @@ function searchProf(query) {
 }
 
 function printSearch(data) {
-  console.log(data)
   if (data != "Unvalid") {
     $.ajax({
       url: "api/index.php/getPermission"
     }).done(function(permission) {
       var person = JSON.parse(permission);
-      if (person.Role == "customer") {
+      if (person == null) {
         $.ajax({
           url: "api/index.php/getProfile/me"
         }).done(function(keydata) {

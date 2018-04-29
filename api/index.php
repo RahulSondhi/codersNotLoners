@@ -9,6 +9,7 @@ require "$path/api/base.php";
 require "$path/api/profile.php";
 require "$path/api/search.php";
 require "$path/api/manage.php";
+require "$path/api/dates.php";
 
 $app = new \Slim\Slim();
 $body= $app->request()->getBody();
@@ -44,6 +45,16 @@ $app->get('/getLikes/:profile', function($profile){
 
 $app->get('/getDates/:profile', function($profile){
   getDates($profile);
+  exit;
+});
+
+$app->get('/getDate/:profile1/:profile2/:time',function($profile1,$profile2,$time){
+  getDateInfo($profile1,$profile2,$time);
+  exit;
+});
+
+$app->get('/addComment/:profile1/:profile2/:time/:comment',function($profile1,$profile2,$time,$comment){
+  addComment($profile1,$profile2,$time,$comment);
   exit;
 });
 
