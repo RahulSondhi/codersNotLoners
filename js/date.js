@@ -33,8 +33,9 @@ function addComments(data,infoNeeded){
      var comment = "<div class='comment'> >"+comments[i]+"</div>";
      $("#DateCommentsContent").append(comment);
    }
-
+   $("#DateCommentsContent").scrollTop($("#DateCommentsContent")[0].scrollHeight);
    $("#DateCommentsComment").on("change", function(e) {
+     $("#DateCommentsComment").off();
      submitComment(data,infoNeeded);
    });
 }
@@ -42,11 +43,12 @@ function addComments(data,infoNeeded){
 
 function submitComment(data,infoNeeded){
   var comment = data+";"+$("#DateCommentsComment").val();
-  comment = comment.replace("%20"," ")
+  comment = comment.replace("%20"," ");
   $.ajax({
     url: "api/index.php/addComment/"+infoNeeded[0]+"/"+infoNeeded[1]+"/"+infoNeeded[2]+"/"+comment
   }).done(function(data) {
     var dateInfo = JSON.parse(data);
-    ogranizeDateInfo(dateInfo[0]);
+    $("#DateCommentsComment").val("");
+    ogranizeDateInfo(dateInfo[0],infoNeeded);
   });
 }

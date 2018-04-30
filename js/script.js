@@ -108,17 +108,28 @@ function reloadUpdate() {
 
   $.ajax({
     url: "api/index.php/loggedin"
-  }).done(function(data) {
-    console.log(data);
+  }).done(function(keydata) {
+    var splitme = keydata.split(",")
+    var data = splitme[0];
+    var banana = splitme[1];
     redoLogin();
     if (data == 1) {
+      if(banana == "customer"){
+        openProfileSelection();
+      }else{
+        unhideNav(true);
+        window.location.hash = "manage";
+        updateUrl();
+      }
+    }else if (data == 2){
+      unhideNav(false);
       if (window.location.hash == "" || window.location.hash == "#") {
-        hideAllPages();
+        window.location.hash = "profile";
+        updateUrl();
       } else {
         updateUrl()
       }
-      unhideNav();
-    } else {
+    }else {
       hideAllPages();
       window.location.hash = "";
     }

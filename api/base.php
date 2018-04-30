@@ -35,7 +35,7 @@ function login($body){
 
     $count=mysqli_num_rows($result);
 
-    if($count==1){
+    if($count>0){
       $role = mysqli_fetch_assoc($result);
       $_SESSION['role'] = $role;
       print_r(JSON_encode($role));
@@ -97,7 +97,13 @@ function getPermission(){
   $result = mysqli_query($conn,$sql);
 
   $role = mysqli_fetch_assoc($result);
-  $_SESSION['role'] = $role;
+  $count=mysqli_num_rows($result);
+  if($count>0){
+    $_SESSION['role'] = $role;
+  }else{
+    $role = 'customer';
+    $_SESSION['role'] = $role;
+  }
   print_r(JSON_encode($role));
 }
 
@@ -106,15 +112,31 @@ function loggedin(){
   session_start();
 
   if($_SESSION['loggedin'] == true){
-    $info = array();
-    $sql="SELECT * FROM Profile WHERE OwnerSSN='$userName'";
+    $userName = $_SESSION['SSN'];
+    $sql="SELECT * FROM Person WHERE SSN='$userName'";
     $result = mysqli_query($conn,$sql);
-    while ($row = mysqli_fetch_assoc($result)) {
-      $info[] = $row;
+    $count=mysqli_num_rows($result);
+
+    if($count>0){
+         $role = $_SESSION['role'];
+      if($role == 'customer'){
+        $userName= $_SESSION['username'];
+        $SSN = $_SESSION['SSN'];
+        $sql="SELECT * FROM Profile WHERE ProfileID='$userName' AND OwnerSSN='$SSN'";
+        $result = mysqli_query($conn,$sql);
+        $count=mysqli_num_rows($result);
+          if($count>0){
+            print_r("2,customer");
+          }else{
+            print_r("1,customer");
+          }
+      }else{
+        print_r("1,");
+        print_r($_SESSION);
+      }
     }
-    print_r(JSON_encode($info));
   }else{
-    print_r("0");
+    print_r("0,0");
   }
 }
 
