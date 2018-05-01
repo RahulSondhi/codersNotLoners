@@ -255,7 +255,8 @@ body {
   overflow-x: hidden;
 }
 
-#profileCreator {
+#profileCreator,
+#accountCreator {
   width: 90%;
   height: 70%;
   left: 5%;
@@ -292,7 +293,8 @@ body {
   font-size: 1.8rem;
 }
 
-#createAccountButton {
+#createAccountButton,
+#createProfileButton {
   margin-top: 9%;
   margin-bottom: 2%;
   padding: 3%;
@@ -310,7 +312,8 @@ body {
   font-size: 1.3rem;
 }
 
-#createAccountButton:active {
+#createAccountButton:active,
+#createProfileButton:active {
   box-shadow: 0 0.3125rem grey;
   transform: translateY(0.250rem);
 }

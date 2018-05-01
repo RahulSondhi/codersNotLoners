@@ -40,6 +40,13 @@ $app->post('/makeAccount', function(){
   exit;
 });
 
+$app->post('/makeProfile', function(){
+  global $body;
+
+  makeProfile($body);
+  exit;
+});
+
 $app->get('/getProfile/:profile', function($profile){
   getProfile($profile);
   exit;

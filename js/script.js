@@ -1,31 +1,31 @@
-$(function () {
-    startEmUp();
+$(function() {
+  startEmUp();
 
-    $(window).on("unload", function (e) {
-        updateUrl();
-    });
+  $(window).on("unload", function(e) {
+    updateUrl();
+  });
 
-    $(window).on('hashchange', function () {
-        updateUrl();
-    });
+  $(window).on('hashchange', function() {
+    updateUrl();
+  });
 });
 
 function startEmUp() {
-    $.ajax({
-        url: "api/index.php/startEmUp"
-    }).done(function (data) {
-        console.log(data);
-        setSky();
-        setNavbar();
-        reloadUpdate();
-        initLogIn();
-    })
+  $.ajax({
+    url: "api/index.php/startEmUp"
+  }).done(function(data) {
+    console.log(data);
+    setSky();
+    setNavbar();
+    reloadUpdate();
+    initLogIn();
+  })
 }
 
 function initLogIn() {
   $("#logInButton").click(function() {
 
-    if ($("#logInUsername").val()){
+    if ($("#logInUsername").val()) {
       var toSend = {};
       toSend.username = $("#logInUsername").val();
       toSend.password = $("#logInPassword").val();
@@ -35,12 +35,12 @@ function initLogIn() {
         data: JSON.stringify(toSend),
         dataType: "json"
       }).done(function(banana) {
-        if (banana == false){
+        if (banana == false) {
           console.log("Unvalid")
         } else {
-          if(banana == "customer"){
+          if (banana == "customer") {
             openProfileSelection();
-          }else{
+          } else {
             unhideNav(true);
             window.location.hash = "manage";
             updateUrl();
@@ -53,141 +53,306 @@ function initLogIn() {
 
 }
 
-function redoLogin(){
+function redoLogin() {
   $("#logInTitle").html("Log In");
   $("#logInHolder").removeClass("hidden");
   $("#profileLogInHolder").addClass("hidden");
+  $("#accountCreator").addClass("hidden");
+  $("#profileCreator").addClass("hidden");
 }
 
-function openProfileSelection(){
+function openProfileSelection() {
   $("#profileLogInHolder").html(" ");
   $.ajax({
     url: "api/index.php/getProfiles"
   }).done(function(data) {
-      $("#logInTitle").html("Profiles");
-      $("#logInHolder").addClass("hidden");
-      $("#profileLogInHolder").removeClass("hidden");
+    $("#logInTitle").html("Profiles");
+    $("#logInHolder").addClass("hidden");
+    $("#profileCreator").addClass("hidden");
+    $("#profileLogInHolder").removeClass("hidden");
 
-      var profiles = JSON.parse(data);
-      for(var i = 0; i < profiles.length; i++){
-        var photo = "";
-        if (profiles[i].M_F == "Male") {
-          photo = "media/men.svg";
-        } else {
-          photo = "media/women.svg";
-        }
-        var hi = profiles[i].ProfileID;
-        var profile = "<div class='profileLogIn' onclick='{logInProfile("+'"'+hi+'"'+")}'><img src='"+photo+"' class='profileLogInPhoto'><div class='profileLogInName'>"+profiles[i].ProfileID+"</div></div>";
-        $("#profileLogInHolder").append(profile);
+    var profiles = JSON.parse(data);
+    for (var i = 0; i < profiles.length; i++) {
+      var photo = "";
+      if (profiles[i].M_F == "Male") {
+        photo = "media/men.svg";
+      } else {
+        photo = "media/women.svg";
       }
-      $("#profileLogInHolder").append("<div class='profileLogIn'><img src='media/add.svg' class='profileLogInPhotoADD'><div class='profileLogInName'>"+"New Account"+"</div></div>");
+      var hi = profiles[i].ProfileID;
+      var profile = "<div class='profileLogIn' onclick='{logInProfile(" + '"' + hi + '"' + ")}'><img src='" + photo + "' class='profileLogInPhoto'><div class='profileLogInName'>" + profiles[i].ProfileID + "</div></div>";
+      $("#profileLogInHolder").append(profile);
+    }
+    $("#profileLogInHolder").append("<div class='profileLogIn' onclick='{createProfile();}'><img src='media/add.svg' class='profileLogInPhotoADD'><div class='profileLogInName'>" + "New Account" + "</div></div>");
 
   });
 }
 
-function createAccount(){
+
+function createProfile() {
   console.log("CREATE ME")
-  $("#logInHolder").addClass("hidden");
-  $("#logInTitle").html("Create Account");
+  $("#profileLogInHolder").addClass("hidden");
+  $("#logInTitle").html("Create Profile");
 
-  $("#profileCreatorSSN").html(" ");
-  $("#profileCreatorPassword").html(" ");
-  $("#profileCreatorFirstName").html(" ");
-  $("#profileCreatorLastName").html(" ");
-  $("#profileCreatorEmail").html(" ");
-  $("#profileCreatorStreet").html(" ");
-  $("#profileCreatorState").html(" ");
-  $("#profileCreatorZip").html(" ");
-  $("#profileCreatorTelephone").html(" ");
+  $("#profileCreatorProfileID").val("");
+  $("#profileCreatorAgeRangeStart").val("");
+  $("#profileCreatorAgeRangeEnd").val("");
+  $("#profileCreatorHobbies").val("");
+  $("#profileCreatorAge").val("");
+  $("#profileCreatorSex").val("");
+  $("#profileCreatorGeorange").val("");
+  $("#profileCreatorHeight").val("");
+  $("#profileCreatorWeight").val("");
+  $("#profileCreatorHairColor").val("");
+  $("#profileCreatorCardnum").val("");
+  $("#profileCreatorAcctnum").val("");
 
-  $("#createAccountButton").click(function(){
-    submitNewAccount();
+  $("#createProfileButton").click(function() {
+    submitNewProfile();
   });
+
   $("#profileCreator").removeClass("hidden");
 }
 
-function submitNewAccount(){
+function submitNewProfile() {
   var profile = {};
   var submit = true;
-  profile.SSN = $("#profileCreatorSSN").val();
-  profile.Password = $("#profileCreatorPassword").val();
-  profile.FirstName = $("#profileCreatorFirstName").val();
-  profile.LastName = $("#profileCreatorLastName").val();
-  profile.Email = $("#profileCreatorEmail").val();
-  profile.Street = $("#profileCreatorStreet").val();
-  profile.City = $("#profileCreatorCity").val();
-  profile.State = $("#profileCreatorState").val();
-  profile.Zip = $("#profileCreatorZip").val();
-  profile.Telephone = $("#profileCreatorTelephone").val();
 
-  if(profile.SSN == 0 || profile.SSN.replace(/\s/g, '') == ""){
-    submit = false;
-    $("#profileCreatorSSN").addClass("blink");
+  profile.ProfileID = $("#profileCreatorProfileID").val();
+  profile.AgeRangeStart = $("#profileCreatorAgeRangeStart").val();
+  profile.AgeRangeEnd = $("#profileCreatorAgeRangeEnd").val();
+  profile.Hobbies = $("#profileCreatorHobbies").val();
+  profile.Age = $("#profileCreatorAge").val();
+  if ($("#profileCreatorSex").val() == "m" || $("#profileCreatorSex").val() == "M") {
+    profile.Sex = "Male";
+  } else if ($("#profileCreatorSex").val() == "f" || $("#profileCreatorSex").val() == "F"){
+    profile.Sex = "Female";
   }else{
-    $("#profileCreatorSSN").removeClass("blink");
+    profile.Sex = "None"
+  }
+  profile.Georange = $("#profileCreatorGeorange").val();
+  profile.Height = $("#profileCreatorHeight").val();
+  profile.Weight = $("#profileCreatorWeight").val();
+  profile.HairColor = $("#profileCreatorHairColor").val();
+  profile.Cardnum = $("#profileCreatorCardnum").val();
+  profile.Acctnum = $("#profileCreatorAcctnum").val();
+
+  if (profile.ProfileID.replace(/\s/g, '') == "") {
+    submit = false;
+    $("#profileCreatorProfileID").addClass("blink");
+  } else {
+    $("#profileCreatorProfileID").removeClass("blink");
   }
 
-  if(profile.Password.replace(/\s/g, '') == ""){
+  if (profile.AgeRangeStart.replace(/\s/g, '') == "" && profile.AgeRangeStart >= 18 && profile.AgeRangeEnd.replace(/\s/g, '') == "" && profile.AgeRangeEnd >= 18) {
     submit = false;
-    $("#profileCreatorPassword").addClass("blink");
-  }else{
-    $("#profileCreatorPassword").removeClass("blink");
+    $("#profileCreatorAgeRangeStart").addClass("blink");
+    $("#profileCreatorAgeRangeEnd").addClass("blink");
+  } else {
+    if (profile.AgeRangeStart >= 18 && profile.AgeRangeEnd >= 18 && profile.AgeRangeStart <= profile.AgeRangeEnd) {
+      $("#profileCreatorAgeRangeEnd").removeClass("blink");
+      $("#profileCreatorAgeRangeStart").removeClass("blink");
+    } else {
+      submit = false;
+      $("#profileCreatorAgeRangeStart").addClass("blink");
+      $("#profileCreatorAgeRangeEnd").addClass("blink");
+    }
   }
 
-  if(profile.FirstName.replace(/\s/g, '') == ""){
+  if (profile.Hobbies.replace(/\s/g, '') == "") {
     submit = false;
-    $("#profileCreatorFirstName").addClass("blink");
-  }else{
-    $("#profileCreatorFirstName").removeClass("blink");
+    $("#profileCreatorHobbies").addClass("blink");
+  } else {
+    $("#profileCreatorHobbies").removeClass("blink");
   }
 
-  if(profile.LastName.replace(/\s/g, '') == ""){
+  if (profile.Age.replace(/\s/g, '') == "") {
     submit = false;
-    $("#profileCreatorLastName").addClass("blink");
-  }else{
-    $("#profileCreatorLastName").removeClass("blink");
+    $("#profileCreatorAge").addClass("blink");
+  } else {
+    if(profile.Age >= 18){
+      $("#profileCreatorAge").removeClass("blink");
+    }else{
+      submit = false;
+      $("#profileCreatorAge").addClass("blink");
+    }
   }
 
-  if(profile.Email.replace(/\s/g, '') == ""){
+  if (profile.Georange.replace(/\s/g, '') == "") {
     submit = false;
-    $("#profileCreatorEmail").addClass("blink");
-  }else{
-    $("#profileCreatorEmail").removeClass("blink");
+    $("#profileCreatorGeorange").addClass("blink");
+  } else {
+    $("#profileCreatorGeorange").removeClass("blink");
   }
 
-  if(profile.Street.replace(/\s/g, '') == ""){
+  if (profile.Height.replace(/\s/g, '') == "") {
     submit = false;
-    $("#profileCreatorStreet").addClass("blink");
-  }else{
-    $("#profileCreatorStreet").removeClass("blink");
+    $("#profileCreatorHeight").addClass("blink");
+  } else {
+    $("#profileCreatorHeight").removeClass("blink");
   }
 
-  if(profile.City.replace(/\s/g, '') == ""){
+  if (profile.Weight.replace(/\s/g, '') == "") {
     submit = false;
-    $("#profileCreatorCity").addClass("blink");
-  }else{
-    $("#profileCreatorCity").removeClass("blink");
+    $("#profileCreatorWeight").addClass("blink");
+  } else {
+    $("#profileCreatorWeight").removeClass("blink");
   }
 
-  if(profile.State.replace(/\s/g, '') == ""){
+  if (profile.HairColor.replace(/\s/g, '') == "") {
     submit = false;
-    $("#profileCreatorState").addClass("blink");
-  }else{
-    $("#profileCreatorState").removeClass("blink");
+    $("#profileCreatorHairColor").addClass("blink");
+  } else {
+    $("#profileCreatorHairColor").removeClass("blink");
   }
 
-  if(profile.Zip.replace(/\s/g, '') == ""){
+  if (profile.Sex == "None"){
     submit = false;
-    $("#profileCreatorZip").addClass("blink");
-  }else{
-    $("#profileCreatorZip").removeClass("blink");
+    $("#profileCreatorSex").addClass("blink");
+  } else {
+    $("#profileCreatorSex").removeClass("blink");
   }
 
-  if(profile.Telephone.replace(/\s/g, '') == ""){
+  if (profile.Cardnum.replace(/\s/g, '') == "") {
     submit = false;
-    $("#profileCreatorTelephone").addClass("blink");
-  }else{
-    $("#profileCreatorTelephone").removeClass("blink");
+    $("#profileCreatorCardnum").addClass("blink");
+  } else {
+    $("#profileCreatorCardnum").removeClass("blink");
+  }
+
+  if (profile.Acctnum.replace(/\s/g, '') == "") {
+    submit = false;
+    $("#profileCreatorAcctnum").addClass("blink");
+  } else {
+    $("#profileCreatorAcctnum").removeClass("blink");
+  }
+
+  if (submit) {
+    $.ajax({
+      type: "post",
+      url: "api/index.php/makeProfile",
+      data: JSON.stringify(profile),
+      dataType: "json"
+    }).done(function(banana) {
+      if (banana.includes("PRIMARY") == false && banana.includes("New") == true) {
+        openProfileSelection();
+      } else {
+        $("#profileCreator").animate({
+          scrollTop: 0
+        }, "fast");
+        $("#profileCreatorProfileID").addClass("blink");
+        $("#profileCreatorAcctnum").addClass("blink");
+      }
+    });
+  } else {
+    $("#profileCreator").animate({
+      scrollTop: 0
+    }, "fast");
+  }
+}
+
+function createAccount() {
+  $("#logInHolder").addClass("hidden");
+  $("#logInTitle").html("Create Account");
+
+  $("#accountCreatorSSN").val("");
+  $("#accountCreatorPassword").val("");
+  $("#accountCreatorFirstName").val("");
+  $("#accountCreatorLastName").val("");
+  $("#accountCreatorEmail").val("");
+  $("#accountCreatorStreet").val("");
+  $("#accountCreatorState").val("");
+  $("#accountCreatorZip").val("");
+  $("#accountCreatorTelephone").val("");
+
+  $("#createAccountButton").click(function() {
+    submitNewAccount();
+  });
+  $("#accountCreator").removeClass("hidden");
+}
+
+function submitNewAccount() {
+  var profile = {};
+  var submit = true;
+  profile.SSN = $("#accountCreatorSSN").val();
+  profile.Password = $("#accountCreatorPassword").val();
+  profile.FirstName = $("#accountCreatorFirstName").val();
+  profile.LastName = $("#accountCreatorLastName").val();
+  profile.Email = $("#accountCreatorEmail").val();
+  profile.Street = $("#accountCreatorStreet").val();
+  profile.City = $("#accountCreatorCity").val();
+  profile.State = $("#accountCreatorState").val();
+  profile.Zip = $("#accountCreatorZip").val();
+  profile.Telephone = $("#accountCreatorTelephone").val();
+
+  if (profile.SSN == 0 || profile.SSN.replace(/\s/g, '') == "") {
+    submit = false;
+    $("#accountCreatorSSN").addClass("blink");
+  } else {
+    $("#accountCreatorSSN").removeClass("blink");
+  }
+
+  if (profile.Password.replace(/\s/g, '') == "") {
+    submit = false;
+    $("#accountCreatorPassword").addClass("blink");
+  } else {
+    $("#accountCreatorPassword").removeClass("blink");
+  }
+
+  if (profile.FirstName.replace(/\s/g, '') == "") {
+    submit = false;
+    $("#accountCreatorFirstName").addClass("blink");
+  } else {
+    $("#accountCreatorFirstName").removeClass("blink");
+  }
+
+  if (profile.LastName.replace(/\s/g, '') == "") {
+    submit = false;
+    $("#accountCreatorLastName").addClass("blink");
+  } else {
+    $("#accountCreatorLastName").removeClass("blink");
+  }
+
+  if (profile.Email.replace(/\s/g, '') == "") {
+    submit = false;
+    $("#accountCreatorEmail").addClass("blink");
+  } else {
+    $("#accountCreatorEmail").removeClass("blink");
+  }
+
+  if (profile.Street.replace(/\s/g, '') == "") {
+    submit = false;
+    $("#accountCreatorStreet").addClass("blink");
+  } else {
+    $("#accountCreatorStreet").removeClass("blink");
+  }
+
+  if (profile.City.replace(/\s/g, '') == "") {
+    submit = false;
+    $("#accountCreatorCity").addClass("blink");
+  } else {
+    $("#accountCreatorCity").removeClass("blink");
+  }
+
+  if (profile.State.replace(/\s/g, '') == "") {
+    submit = false;
+    $("#accountCreatorState").addClass("blink");
+  } else {
+    $("#accountCreatorState").removeClass("blink");
+  }
+
+  if (profile.Zip.replace(/\s/g, '') == "") {
+    submit = false;
+    $("#accountCreatorZip").addClass("blink");
+  } else {
+    $("#accountCreatorZip").removeClass("blink");
+  }
+
+  if (profile.Telephone.replace(/\s/g, '') == "") {
+    submit = false;
+    $("#accountCreatorTelephone").addClass("blink");
+  } else {
+    $("#accountCreatorTelephone").removeClass("blink");
   }
 
   if (submit) {
@@ -197,12 +362,23 @@ function submitNewAccount(){
       data: JSON.stringify(profile),
       dataType: "json"
     }).done(function(banana) {
-      console.log(banana);
+      if (banana.includes("PRIMARY") == false && banana.includes("New") == true) {
+        redoLogin();
+      } else {
+        $("#accountCreator").animate({
+          scrollTop: 0
+        }, "fast");
+        $("#accountCreatorSSN").addClass("blink");
+      }
     });
+  } else {
+    $("#accountCreator").animate({
+      scrollTop: 0
+    }, "fast");
   }
 }
 
-function logInProfile(profile){
+function logInProfile(profile) {
   var toSend = {};
   toSend.username = profile;
   $.ajax({
@@ -211,12 +387,12 @@ function logInProfile(profile){
     data: JSON.stringify(toSend),
     dataType: "json"
   }).done(function(banana) {
-    if (banana == false){
+    if (banana == false) {
       console.log("Unvalid")
     } else {
-        unhideNav(false);
-        window.location.hash = "profile";
-        updateUrl();
+      unhideNav(false);
+      window.location.hash = "profile";
+      updateUrl();
     }
   });
 }
@@ -231,14 +407,14 @@ function reloadUpdate() {
     var banana = splitme[1];
     redoLogin();
     if (data == 1) {
-      if(banana == "customer"){
+      if (banana == "customer") {
         openProfileSelection();
-      }else{
+      } else {
         unhideNav(true);
         window.location.hash = "manage";
         updateUrl();
       }
-    }else if (data == 2){
+    } else if (data == 2) {
       unhideNav(false);
       if (window.location.hash == "" || window.location.hash == "#") {
         window.location.hash = "profile";
@@ -246,7 +422,7 @@ function reloadUpdate() {
       } else {
         updateUrl()
       }
-    }else {
+    } else {
       hideAllPages();
       window.location.hash = "";
     }
@@ -258,10 +434,10 @@ function unhideNav(admin) {
   $("#contentPanel").removeClass("hidden");
   $("#navbar").removeClass("hidden");
 
-  if(admin){
+  if (admin) {
     $("#navbarProfile").addClass("hidden");
     $("#navbarManage").removeClass("hidden");
-  }else{
+  } else {
     $("#navbarProfile").removeClass("hidden");
     $("#navbarManage").addClass("hidden");
   }
@@ -270,89 +446,89 @@ function unhideNav(admin) {
 }
 
 function hideNav() {
-    $("#contentPanel").addClass("hidden");
-    $("#navbar").addClass("hidden");
-    $("#logIn").removeClass("hidden");
+  $("#contentPanel").addClass("hidden");
+  $("#navbar").addClass("hidden");
+  $("#logIn").removeClass("hidden");
 }
 
 function hideAllPages() {
-    $("#contentPanelProfile").removeClass("hidden");
-    $("#contentPanelSettings").removeClass("hidden");
-    $("#contentPanelSearch").removeClass("hidden");
-    $("#contentPanelDate").removeClass("hidden");
-    $("#contentPanelManage").removeClass("hidden");
-    $("#editEmployeePage").removeClass("hidden");
+  $("#contentPanelProfile").removeClass("hidden");
+  $("#contentPanelSettings").removeClass("hidden");
+  $("#contentPanelSearch").removeClass("hidden");
+  $("#contentPanelDate").removeClass("hidden");
+  $("#contentPanelManage").removeClass("hidden");
+  $("#editEmployeePage").removeClass("hidden");
 
-    $("#contentPanelProfile").addClass("hidden");
-    $("#contentPanelSettings").addClass("hidden");
-    $("#contentPanelSearch").addClass("hidden");
-    $("#contentPanelDate").addClass("hidden");
-    $("#contentPanelManage").addClass("hidden");
-    $("#editEmployeePage").addClass("hidden");
+  $("#contentPanelProfile").addClass("hidden");
+  $("#contentPanelSettings").addClass("hidden");
+  $("#contentPanelSearch").addClass("hidden");
+  $("#contentPanelDate").addClass("hidden");
+  $("#contentPanelManage").addClass("hidden");
+  $("#editEmployeePage").addClass("hidden");
 }
 
 function setNavbar() {
-    $("#navbarManage").click(function () {
-        window.location.hash = "manage";
-    });
-    $("#navbarSearch").click(function () {
-        window.location.hash = "search";
-    });
-    $("#navbarProfile").click(function () {
-        window.location.hash = "profile";
-    });
-    $("#navbarSetting").click(function () {
-        window.location.hash = "setting";
-    });
-    $("#navbarLogOut").click(function () {
-        logout();
-    });
+  $("#navbarManage").click(function() {
+    window.location.hash = "manage";
+  });
+  $("#navbarSearch").click(function() {
+    window.location.hash = "search";
+  });
+  $("#navbarProfile").click(function() {
+    window.location.hash = "profile";
+  });
+  $("#navbarSetting").click(function() {
+    window.location.hash = "setting";
+  });
+  $("#navbarLogOut").click(function() {
+    logout();
+  });
 }
 
 
 function logout() {
-    $.ajax({
-        url: "api/index.php/logout"
-    }).done(function (data) {
-        hideNav();
-        reloadUpdate();
-    })
+  $.ajax({
+    url: "api/index.php/logout"
+  }).done(function(data) {
+    hideNav();
+    reloadUpdate();
+  })
 }
 
 function updateUrl() {
-    var hash = window.location.hash;
-    var parse = hash.split("-");
-    hideAllPages();
-    switch (parse[0]) {
-        case "#manage":
-            $("#contentPanelManage").removeClass("hidden");
-            break;
-        case "#search":
-            searchProf(parse);
-            $("#contentPanelSearch").removeClass("hidden");
-            break;
-        case "#date":
-            loadDate();
-            $("#contentPanelDate").removeClass("hidden");
-            break;
-        case "#setting":
-            $("#contentPanelSettings").removeClass("hidden")
-            break;
-        case "#profile":
-            if (parse[1]) {
-                loadProfile(parse[1])
-            } else {
-                loadProfile("me");
-            }
-            break;
-        default:
-            break;
-    }
+  var hash = window.location.hash;
+  var parse = hash.split("-");
+  hideAllPages();
+  switch (parse[0]) {
+    case "#manage":
+      $("#contentPanelManage").removeClass("hidden");
+      break;
+    case "#search":
+      searchProf(parse);
+      $("#contentPanelSearch").removeClass("hidden");
+      break;
+    case "#date":
+      loadDate();
+      $("#contentPanelDate").removeClass("hidden");
+      break;
+    case "#setting":
+      $("#contentPanelSettings").removeClass("hidden")
+      break;
+    case "#profile":
+      if (parse[1]) {
+        loadProfile(parse[1])
+      } else {
+        loadProfile("me");
+      }
+      break;
+    default:
+      break;
+  }
 }
 
 function setSky() {
-    $("#content").addClass("sky-gradient-" + new Date().getHours());
-    window.setTimeout(function () {
-        setSky();
-    }, 6000);
+  $("#content").addClass("sky-gradient-" + new Date().getHours());
+  window.setTimeout(function() {
+    setSky();
+  }, 6000);
 }
