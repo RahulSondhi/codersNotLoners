@@ -33,6 +33,13 @@ $app->post('/loginProfile', function(){
   exit;
 });
 
+$app->post('/makeAccount', function(){
+  global $body;
+
+  makeAccount($body);
+  exit;
+});
+
 $app->get('/getProfile/:profile', function($profile){
   getProfile($profile);
   exit;

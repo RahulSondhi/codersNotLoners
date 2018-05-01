@@ -85,6 +85,123 @@ function openProfileSelection(){
   });
 }
 
+function createAccount(){
+  console.log("CREATE ME")
+  $("#logInHolder").addClass("hidden");
+  $("#logInTitle").html("Create Account");
+
+  $("#profileCreatorSSN").html(" ");
+  $("#profileCreatorPassword").html(" ");
+  $("#profileCreatorFirstName").html(" ");
+  $("#profileCreatorLastName").html(" ");
+  $("#profileCreatorEmail").html(" ");
+  $("#profileCreatorStreet").html(" ");
+  $("#profileCreatorState").html(" ");
+  $("#profileCreatorZip").html(" ");
+  $("#profileCreatorTelephone").html(" ");
+
+  $("#createAccountButton").click(function(){
+    submitNewAccount();
+  });
+  $("#profileCreator").removeClass("hidden");
+}
+
+function submitNewAccount(){
+  var profile = {};
+  var submit = true;
+  profile.SSN = $("#profileCreatorSSN").val();
+  profile.Password = $("#profileCreatorPassword").val();
+  profile.FirstName = $("#profileCreatorFirstName").val();
+  profile.LastName = $("#profileCreatorLastName").val();
+  profile.Email = $("#profileCreatorEmail").val();
+  profile.Street = $("#profileCreatorStreet").val();
+  profile.City = $("#profileCreatorCity").val();
+  profile.State = $("#profileCreatorState").val();
+  profile.Zip = $("#profileCreatorZip").val();
+  profile.Telephone = $("#profileCreatorTelephone").val();
+
+  if(profile.SSN == 0 || profile.SSN.replace(/\s/g, '') == ""){
+    submit = false;
+    $("#profileCreatorSSN").addClass("blink");
+  }else{
+    $("#profileCreatorSSN").removeClass("blink");
+  }
+
+  if(profile.Password.replace(/\s/g, '') == ""){
+    submit = false;
+    $("#profileCreatorPassword").addClass("blink");
+  }else{
+    $("#profileCreatorPassword").removeClass("blink");
+  }
+
+  if(profile.FirstName.replace(/\s/g, '') == ""){
+    submit = false;
+    $("#profileCreatorFirstName").addClass("blink");
+  }else{
+    $("#profileCreatorFirstName").removeClass("blink");
+  }
+
+  if(profile.LastName.replace(/\s/g, '') == ""){
+    submit = false;
+    $("#profileCreatorLastName").addClass("blink");
+  }else{
+    $("#profileCreatorLastName").removeClass("blink");
+  }
+
+  if(profile.Email.replace(/\s/g, '') == ""){
+    submit = false;
+    $("#profileCreatorEmail").addClass("blink");
+  }else{
+    $("#profileCreatorEmail").removeClass("blink");
+  }
+
+  if(profile.Street.replace(/\s/g, '') == ""){
+    submit = false;
+    $("#profileCreatorStreet").addClass("blink");
+  }else{
+    $("#profileCreatorStreet").removeClass("blink");
+  }
+
+  if(profile.City.replace(/\s/g, '') == ""){
+    submit = false;
+    $("#profileCreatorCity").addClass("blink");
+  }else{
+    $("#profileCreatorCity").removeClass("blink");
+  }
+
+  if(profile.State.replace(/\s/g, '') == ""){
+    submit = false;
+    $("#profileCreatorState").addClass("blink");
+  }else{
+    $("#profileCreatorState").removeClass("blink");
+  }
+
+  if(profile.Zip.replace(/\s/g, '') == ""){
+    submit = false;
+    $("#profileCreatorZip").addClass("blink");
+  }else{
+    $("#profileCreatorZip").removeClass("blink");
+  }
+
+  if(profile.Telephone.replace(/\s/g, '') == ""){
+    submit = false;
+    $("#profileCreatorTelephone").addClass("blink");
+  }else{
+    $("#profileCreatorTelephone").removeClass("blink");
+  }
+
+  if (submit) {
+    $.ajax({
+      type: "post",
+      url: "api/index.php/makeAccount",
+      data: JSON.stringify(profile),
+      dataType: "json"
+    }).done(function(banana) {
+      console.log(banana);
+    });
+  }
+}
+
 function logInProfile(profile){
   var toSend = {};
   toSend.username = profile;
@@ -143,7 +260,9 @@ function unhideNav(admin) {
 
   if(admin){
     $("#navbarProfile").addClass("hidden");
+    $("#navbarManage").removeClass("hidden");
   }else{
+    $("#navbarProfile").removeClass("hidden");
     $("#navbarManage").addClass("hidden");
   }
 
@@ -175,19 +294,15 @@ function hideAllPages() {
 function setNavbar() {
     $("#navbarManage").click(function () {
         window.location.hash = "manage";
-        updateUrl();
     });
     $("#navbarSearch").click(function () {
         window.location.hash = "search";
-        updateUrl();
     });
     $("#navbarProfile").click(function () {
         window.location.hash = "profile";
-        updateUrl();
     });
     $("#navbarSetting").click(function () {
         window.location.hash = "setting";
-        updateUrl();
     });
     $("#navbarLogOut").click(function () {
         logout();

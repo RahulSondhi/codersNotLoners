@@ -148,4 +148,12 @@ function logout(){
   $_SESSION['username'] = "";
   $_SESSION['role'] = "";
 }
+
+function makeAccount(){
+  global $body;
+  include("start.php");
+  session_start();
+
+  print_r($body);
+}
 ?>
