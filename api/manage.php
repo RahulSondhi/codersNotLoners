@@ -4,7 +4,7 @@ function getSalesReport($month,$year){
     include("start.php");
     session_start();
     
-    $sql="SELECT * FROM Date WHERE MONTH='$month' AND YEAR='$year'";
+    $sql="SELECT * FROM Date WHERE CONTAINS(Date_Time, $year + '-' + $month)";
     $result = mysqli_query($conn,$sql);
     
     while($row = mysqli_fetch_assoc($result)){
