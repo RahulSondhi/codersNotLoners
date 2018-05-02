@@ -48,6 +48,13 @@ $app->post('/makeProfile', function(){
   exit;
 });
 
+$app->post('/saveSettings', function(){
+  global $body;
+
+  saveSettings($body);
+  exit;
+});
+
 $app->get('/getProfile/:profile', function($profile){
   getProfile($profile);
   exit;
@@ -110,6 +117,16 @@ $app->get('/getPermission', function(){
 
 $app->get('/getSettings/:customer/:id', function($customer,$id){
     getSettings($customer,$id);
+    exit;
+});
+
+$app->get('/deleteProfile/:who/:SSN', function($who,$SSN){
+    deleteProfile($who,$SSN);
+    exit;
+});
+
+$app->get('/deleteAccount/:who', function($who){
+    deleteAccount($who);
     exit;
 });
 

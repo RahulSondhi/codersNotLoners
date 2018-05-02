@@ -46,6 +46,7 @@ function setSearch() {
 }
 
 function initSearch(query) {
+  $("#contentPanelSearchContent").html(" ");
   $.ajax({
     url: "api/index.php/getPermission"
   }).done(function(permission) {

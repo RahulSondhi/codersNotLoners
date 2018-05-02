@@ -1,5 +1,4 @@
 function createProfile() {
-  console.log("CREATE ME")
   $("#profileLogInHolder").addClass("hidden");
   $("#logInTitle").html("Create Profile");
 
@@ -381,6 +380,81 @@ function organizeSettings(level, data, me) {
       $("#SettingsCardnum").val(parseInt(data.CardNumber));
       $("#SettingsAcctnum").val(parseInt(data.AcctNum));
       $("#SettingsPPP option[value='" + data.PPP + "']").prop('selected', true);
+      $("#deleteProfileButton").off();
+      ////////////////////////////////////////////
+      $("#deleteProfileButton").click(function(){
+        $.ajax({
+          url: "api/index.php/deleteProfile/"+data.ProfileID+"/"+data.SSN
+        }).done(function(keydata) {
+          var logout = JSON.parse(keydata);
+          if (logout){
+            $("#navbarLogOut").click();
+          }else{
+            window.location.hash = 'search';
+          }
+        });
+      });
+      ///////////////////////////////////////////
+      $("#deleteAccountButton").click(function(){
+        $.ajax({
+          url: "api/index.php/getProfiles"
+        }).done(function(datas) {
+          var profiles = JSON.parse(datas);
+
+          for (var i = 0; i < profiles.length; i++){
+            $.ajax({
+              url: "api/index.php/deleteProfile/"+profiles[i].ProfileID+"/"+data.SSN
+            }).done(function(keydata) {
+              var logout = JSON.parse(keydata);
+              console.log(logout);
+            });
+          }
+
+          $.ajax({
+            url: "api/index.php/deleteAccount/"+data.SSN
+          }).done(function(keydata) {
+            var logout = JSON.parse(keydata);
+            if (logout){
+              // $("#navbarLogOut").click();
+            }else{
+              window.location.hash = 'search';
+            }
+          });
+        });
+      });
+      ////////////////////////////////////////////
+      $("#saveSettingsButton").click(function(){
+        var toSend = {};
+        toSend.admin="no";
+        toSend.SSN = $("#SettingsSSN").val();
+        toSend.Password = $("#SettingsPassword").val();
+        toSend.Email = $("#SettingsEmail").val();
+        toSend.Street = $("#SettingsStreet").val();
+        toSend.City = $("#SettingsCity").val();
+        toSend.State = $("#SettingsState").val();
+        toSend.Zipcode = $("#SettingsZip").val();
+        toSend.Telephone = $("#SettingsTelephone").val();
+
+        toSend.ProfileID = $("#SettingsProfileID").val();
+        toSend.DatingAgeRangeStart = $("#SettingsAgeRangeStart").val();
+        toSend.DatingAgeRangeEnd = $("#SettingsAgeRangeEnd").val();
+        toSend.Hobbies = $("#SettingsHobbies").val();
+        toSend.Age = $("#SettingsAge").val();
+        toSend.DatinGeoRange = $("#SettingsGeorange").val();
+        toSend.Height = $("#SettingsHeight").val();
+        toSend.Weight = $("#SettingsWeight").val();
+        toSend.HairColor = $("#SettingsHairColor").val();
+        toSend.PPP = $("#SettingsPPP").val();
+
+        $.ajax({
+          type: "post",
+          url: "api/index.php/saveSettings",
+          data: JSON.stringify(toSend),
+          dataType: "json"
+        }).done(function(banana) {
+          console.log(banana);
+        });
+      });
       break;
     case "CustRep":
       $("#SettingsStartDate").val(data.StartDate);
@@ -388,6 +462,31 @@ function organizeSettings(level, data, me) {
       $("#SettingsHourlyRate").prop("readonly", true);
       $("#SettingsRole option[value='" + data.Role + "']").prop('selected', true);
       $("#SettingsRole").attr("disabled", true);
+      $("#deleteAccountButton").click(function(){});
+      $("#saveSettingsButton").click(function(){
+        var toSend = {};
+        toSend.admin="yes";
+        toSend.SSN = $("#SettingsSSN").val();
+        toSend.Password = $("#SettingsPassword").val();
+        toSend.Email = $("#SettingsEmail").val();
+        toSend.Street = $("#SettingsStreet").val();
+        toSend.City = $("#SettingsCity").val();
+        toSend.State = $("#SettingsState").val();
+        toSend.Zipcode = $("#SettingsZip").val();
+        toSend.Telephone = $("#SettingsTelephone").val();
+
+        toSend.StartDate = $("#SettingsStartDate").val();
+        toSend.HourlyRate = $("#SettingsHourlyRate").val();
+
+        $.ajax({
+          type: "post",
+          url: "api/index.php/saveSettings",
+          data: JSON.stringify(toSend),
+          dataType: "json"
+        }).done(function(banana) {
+          console.log(banana);
+        });
+      });
       break;
     case "Manager":
       $("#SettingsStartDate").val(data.StartDate);
@@ -395,6 +494,30 @@ function organizeSettings(level, data, me) {
       $("#SettingsHourlyRate").prop("readonly", false);
       $("#SettingsRole option[value='" + data.Role + "']").prop('selected', true);
       $("#SettingsRole").attr("disabled", false);
+      $("#saveSettingsButton").click(function(){
+        var toSend = {};
+        toSend.admin="yes";
+        toSend.SSN = $("#SettingsSSN").val();
+        toSend.Password = $("#SettingsPassword").val();
+        toSend.Email = $("#SettingsEmail").val();
+        toSend.Street = $("#SettingsStreet").val();
+        toSend.City = $("#SettingsCity").val();
+        toSend.State = $("#SettingsState").val();
+        toSend.Zipcode = $("#SettingsZip").val();
+        toSend.Telephone = $("#SettingsTelephone").val();
+
+        toSend.StartDate = $("#SettingsStartDate").val();
+        toSend.HourlyRate = $("#SettingsHourlyRate").val();
+
+        $.ajax({
+          type: "post",
+          url: "api/index.php/saveSettings",
+          data: JSON.stringify(toSend),
+          dataType: "json"
+        }).done(function(banana) {
+          console.log(banana);
+        });
+      });
       break;
   }
 }
