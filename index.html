@@ -6,6 +6,7 @@
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
   <script src="js/resize.js"></script>
+  <script src="js/settings.js"></script>
   <script src="js/date.js"></script>
   <script src="js/search.js"></script>
   <script src="js/profile.js"></script>
@@ -15,6 +16,7 @@
   <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="css/search.css">
   <link rel="stylesheet" href="css/date.css">
+  <link rel="stylesheet" href="css/settings.css">
 </head>
 
 <body>
@@ -112,6 +114,7 @@
               <div id="contentPanelProfile_InteractionsLike">Like</div>
               <div id="contentPanelProfile_InteractionsDate">Date</div>
               <div id="contentPanelProfile_InteractionsRefer">Refer</div>
+              <div id="contentPanelProfile_InteractionsSettings" class="hidden">Settings</div>
             </div>
           </div>
           <div id="ProfileCenterBar">
@@ -142,7 +145,85 @@
             </div>
           </div>
         </div>
-        <div id="contentPanelSettings"></div>
+        <div id="contentPanelSettings">
+          <div id="contentPanelSettingsContainer">
+            <div id="contentPanelSettingsDefault" class="settingContainer">
+              <div class="SettingsTitleBig">Account Settings</div>
+              <div class="SettingsTitle">SSN</div>
+              <input id="SettingsSSN" type="text" class="SettingsInput" readonly>
+              <div class="SettingsTitle">Password</div>
+              <input id="SettingsPassword" type="text" class="SettingsInput">
+              <div class="SettingsTitle">First Name</div>
+              <input id="SettingsFirstName" type="text" class="SettingsInput" readonly>
+              <div class="SettingsTitle">Last Name</div>
+              <input id="SettingsLastName" type="text" class="SettingsInput" readonly>
+              <div class="SettingsTitle">Email</div>
+              <input id="SettingsEmail" type="email" class="SettingsInput">
+              <div class="SettingsTitle">Street</div>
+              <input id="SettingsStreet" type="text" class="SettingsInput">
+              <div class="SettingsTitle">City</div>
+              <input id="SettingsCity" type="text" class="SettingsInput">
+              <div class="SettingsTitle">State</div>
+              <input id="SettingsState" type="text" class="SettingsInput">
+              <div class="SettingsTitle">Zip</div>
+              <input id="SettingsZip" type="number" class="SettingsInput">
+              <div class="SettingsTitle">Telephone #</div>
+              <input id="SettingsTelephone" type="tel" class="SettingsInput">
+            </div>
+            <div id="contentPanelSettingsETC" class="settingContainer">
+              <div id="contentPanelSettingsProfile">
+                <div class="SettingsTitleBig">Profile Settings</div>
+                <div class="SettingsTitle">ProfileID</div>
+                <input id="SettingsProfileID" type="text" class="SettingsInput" readonly>
+                <div class="SettingsTitle">Lowest Interested Age</div>
+                <input id="SettingsAgeRangeStart" type="number" class="SettingsInput" min="18">
+                <div class="SettingsTitle">Highest Interested Age</div>
+                <input id="SettingsAgeRangeEnd" type="number" class="SettingsInput" min="18">
+                <div class="SettingsTitle">Hobbies(seperate with commas)</div>
+                <input id="SettingsHobbies" type="text" class="SettingsInput">
+                <div class="SettingsTitle">Age</div>
+                <input id="SettingsAge" type="number" class="SettingsInput" min="18">
+                <div class="SettingsTitle">Geo Range</div>
+                <input id="SettingsGeorange" type="number" class="SettingsInput" min="18">
+                <div class="SettingsTitle">Sex(M or F)</div>
+                <input id="SettingsSex" type="text" class="SettingsInput" maxlength="1">
+                <div class="SettingsTitle">Height(ft)</div>
+                <input id="SettingsHeight" type="number" class="SettingsInput">
+                <div class="SettingsTitle">Weight(lbs)</div>
+                <input id="SettingsWeight" type="number" class="SettingsInput">
+                <div class="SettingsTitle">Hair Color</div>
+                <input id="SettingsHairColor" type="text" class="SettingsInput">
+                <div class="SettingsTitle">Credit Card #</div>
+                <input id="SettingsCardnum" type="number" class="SettingsInput">
+                <div class="SettingsTitle">Account Number</div>
+                <input id="SettingsAcctnum" type="number" class="SettingsInput">
+                <div class="SettingsTitle">Profile Placement Priority</div>
+                <select name="SettingsPPP" id="SettingsPPP" class="SettingsInput">
+                  <option value="Super-User">Super-User ($100/yr)</option>
+                  <option value="Good-User">Good-User ($50/yr)</option>
+                  <option value="User-User">User-User (Free)</option>
+                </select>
+              </div>
+              <div id="contentPanelSettingsEmployee" class="hidden">
+                <div class="SettingsTitleBig">Employee Settings</div>
+                <div class="SettingsTitle">Start Date</div>
+                <input id="SettingsStartDate" type="text" class="SettingsInput" readonly>
+                <div class="SettingsTitle">Company Role</div>
+                <select name="SettingsRole" id="SettingsRole" class="SettingsInput">
+                  <option value="CustRep">Customer Rep</option>
+                  <option value="Manager">Manager</option>
+                </select>
+                <div class="SettingsTitle">Hourly Rate</div>
+                <input id="SettingsHourlyRate" type="number" class="SettingsInput">
+              </div>
+            </div>
+          </div>
+          <div id="contentPanelButtonholder">
+            <div id="saveSettingsButton">Save Settings</div>
+            <div id="deleteProfileButton">Delete Profile</div>
+            <div id="deleteAccountButton">Delete Account</div>
+          </div>
+        </div>
         <div id="contentPanelSearch">
           <div id="contentPanelSearchSearchbar">
             <input id="SearchRequest" type="text" name="SearchRequest">
@@ -160,6 +241,8 @@
               <input id="HobbyRequest" class="filterInput" type="text" name="HobbyRequest">
               <div class="filterTitle">Zip Code</div>
               <input id="ZipRequest" class="filterInput" type="text" name="ZipRequest">
+              <div id="EmployeeRequestTitle" class="filterTitle hidden">Employee Mode</div>
+              <input id="EmployeeRequest" type="checkbox" class="hidden" value="FALSE">
             </div>
           </div>
           <div id="contentPanelSearchContent"></div>
@@ -181,6 +264,7 @@
             <input id="DateCommentsComment" type="text">
           </div>
         </div>
+
         <div id="contentPanelManage">
 
           <button id="getSalesReportButton" type="button"> Get Sales report </button>
@@ -192,7 +276,6 @@
           <button id="peopleWhoHaveGoneOutWithButton" type="button"> People who have gone out with a specific person </button>
 
         </div>
-
         <div id="getSalesReport"> </div>
         <div id="listAllUsers"> </div>
         <div id="searchEmployee"> </div>
@@ -201,103 +284,6 @@
         <div id="employeeMostRevenue"> </div>
         <div id="peopleWhoHaveGoneOutWith"> </div>
 
-        <div id="editEmployeePage">
-          <div id="editEmployeeLabel"> Edit Employee</div>
-
-          <button id="deleteEmployeeButton"> Delete </button>
-
-          <div id="employeeSSNInputLabel"> SSN </div>
-          <input id="employeeSSNInput" type="text" name="SSNEmployeeInput">
-
-          <div id="employeePasswordInputLabel"> Password </div>
-          <input id="employeePasswordInput" type="password" name="employeePasswordInput">
-
-          <div id="employeeFirstNameInputLabel"> First Name</div>
-          <input id="employeeFirstNameInput" type="text" name="employeeFirstNameInput">
-
-          <div id="employeeLastNameInputLabel"> Last Name</div>
-          <input id="employeeLastNameInput" type="text" name="employeeLastNameInput">
-
-          <div id="employeeStreetInputLabel"> Street</div>
-          <input id="employeeStreetInput" type="text" name="employeeStreetInput">
-
-          <div id="employeeCityInputLabel"> City</div>
-          <input id="employeeCityInput" type="text" name="employeeCityInput">
-
-          <div id="employeeStateInputLabel"> State</div>
-
-          <select>
-            <option value="Alabama"> AL </option>
-            <option value="Arkansas"> AK </option>
-            <option value="Arizona"> AZ </option>
-            <option value="Arkansas"> AR </option>
-            <option value="California"> CA </option>
-            <option value="Colorado"> CO </option>
-            <option value="Connecticut"> CT </option>
-            <option value="Delaware"> DE </option>
-            <option value="Florida"> FL </option>
-            <option value="Georgia"> GA </option>
-            <option value="Hawaii"> HI </option>
-            <option value="Idaho"> ID </option>
-            <option value="Illinois"> IL </option>
-            <option value="Indiana"> IN </option>
-            <option value="Iowa"> IA </option>
-            <option value="Kansas"> KS </option>
-            <option value="Kentucky"> KY </option>
-            <option value="Lousiana"> LA </option>
-            <option value="Maine"> ME </option>
-            <option value="Maryland"> MD </option>
-            <option value="Massachussets"> MA </option>
-            <option value="Michigan"> MI </option>
-            <option value="Minnesota"> MN </option>
-            <option value="Mississippi"> MS </option>
-            <option value="Missouri"> MO </option>
-            <option value="Montana"> MT </option>
-            <option value="Nebraska"> NE </option>
-            <option value="Nevada"> NV </option>
-            <option value="New Hampshire"> NH </option>
-            <option value="New Jersey"> NJ </option>
-            <option value="New Mexico"> NM </option>
-            <option value="New York"> NY </option>
-            <option value="North Carolina"> NC </option>
-            <option value="North Dakota"> ND </option>
-            <option value="Ohio"> OH </option>
-            <option value="Oklahoma"> OK </option>
-            <option value="Oregon"> OR </option>
-            <option value="Pennsylvania"> PA </option>
-            <option value="Rhode Island"> RI </option>
-            <option value="South Carolina"> SC </option>
-            <option value="South Dakota"> SD </option>
-            <option value="Tennessee"> TN </option>
-            <option value="Texas"> TX </option>
-            <option value="Utah"> UT </option>
-            <option value="Vermont"> VT </option>
-            <option value="Virginia"> VA </option>
-            <option value="Washington"> WA </option>
-            <option value="West Virginia"> WV </option>
-            <option value="Wisconsin"> WI </option>
-            <option value="Wyoming"> WY </option>
-            </select>
-
-          <div id="employeeZIPInputLabel"> ZIP</div>
-          <input id="employeeZIPZnput" type="number" name="employeeZIPInput">
-
-          <div id="employeeEmailInputLabel"> Email</div>
-          <input id="employeeEmailInput" type="email" name="employeeEmailInput">
-
-          <div id="employeeTelephoneInputLabel"> Telephone Number </div>
-          <input id="employeeTelephoneInput" type="tel" name="employeeTelephoneInput">
-
-          <div id="employeeJobRoleInputLabel"> Job Role</div>
-          <input id="employeeJobRoleInput" type="text" name="employeeJobRoleInput">
-
-          <div id="employeeStartRateInputLabel"> Start Rate</div>
-          <input id="employeeStartRateInput" type="number" name="employeeStartRateInput">
-
-          <div id="employeeHourlyRateInputLabel"> Hourly Rate</div>
-          <input id="employeeHourlyRateInput" type="text" name="employeeHourlyRateInput">
-
-        </div>
       </div>
       <div id="city"><img src="media/city.svg" id="cityImg"></div>
     </div>

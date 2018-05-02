@@ -37,6 +37,29 @@ function searchProf($search,$height,$hair,$hobby,$zip){
     print_r(JSON_encode($info));
 }
 
+function searchEmployee($search){
+  include("start.php");
+
+    if($search == "-1"){
+      $search = "";
+    }
+
+    $info = array();
+    $sql="SELECT * FROM Person P,Employee e WHERE (e.SSN = P.SSN AND P.FirstName like '%$search%') OR (P.LastName like '%$search%' AND e.SSN = P.SSN)";
+    $result = mysqli_query($conn,$sql);
+    $count= mysqli_num_rows($result);
+
+    if($count > 0){
+      while ($row = mysqli_fetch_assoc($result)) {
+        $info[] = $row;
+      }
+    }else{
+      $info = "Unvalid";
+    }
+
+    print_r(JSON_encode($info));
+}
+
 function searchAll(){
   include("start.php");
 

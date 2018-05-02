@@ -75,7 +75,7 @@
   top: 55%;
 }
 
-#contentPanelProfile_InteractionsLike, #contentPanelProfile_InteractionsFavorite, #contentPanelProfile_InteractionsDate, #contentPanelProfile_InteractionsRefer {
+#contentPanelProfile_InteractionsLike, #contentPanelProfile_InteractionsFavorite, #contentPanelProfile_InteractionsDate, #contentPanelProfile_InteractionsRefer, #contentPanelProfile_InteractionsSettings {
   width: 100%;
   height: 18%;
   padding: 2%;
@@ -90,7 +90,7 @@
   cursor: pointer;
 }
 
-#contentPanelProfile_InteractionsLike:active, #contentPanelProfile_InteractionsFavorite:active, #contentPanelProfile_InteractionsDate:active, #contentPanelProfile_InteractionsRefer:active {
+#contentPanelProfile_InteractionsLike:active, #contentPanelProfile_InteractionsFavorite:active, #contentPanelProfile_InteractionsDate:active, #contentPanelProfile_InteractionsRefer:active, #contentPanelProfile_InteractionsSettings:active{
   box-shadow: 0 0.3125rem grey;
   transform: translateY(0.250rem);
 }

@@ -23,6 +23,12 @@ $(function() {
   $("#SearchRequestButton").on("click", function(e) {
     setSearch()
   });
+
+  $('#EmployeeRequest').change(function() {
+    var cb = $(this);
+    cb.val(cb.prop('checked'));
+    setSearch();
+  });
 });
 
 function setSearch() {
@@ -32,7 +38,54 @@ function setSearch() {
   var hobby = $("#HobbyRequest").val();
   var zip = $("#ZipRequest").val();
 
-  window.location.hash = "search-search:" + search + "-height:" + height + "-hair:" + hair + "-hobby:" + hobby + "-zip:" + zip;
+  if ($('#EmployeeRequest').val() == "true") {
+    window.location.hash = "search-employee-search:" + search;
+  } else {
+    window.location.hash = "search-search:" + search + "-height:" + height + "-hair:" + hair + "-hobby:" + hobby + "-zip:" + zip;
+  }
+}
+
+function initSearch(query) {
+  $.ajax({
+    url: "api/index.php/getPermission"
+  }).done(function(permission) {
+    var person = JSON.parse(permission);
+    if (person == "Manager" || person == "CustRep") {
+      $("#EmployeeRequest").removeClass("hidden");
+      $("#EmployeeRequestTitle").removeClass("hidden");
+      if (query[1] == "employee") {
+        $('#EmployeeRequest').prop('checked', true);
+        $('#EmployeeRequest').val($('#EmployeeRequest').prop('checked'));
+        searchEmployee(query);
+      } else {
+        searchProf(query);
+      }
+    } else {
+      $("#EmployeeRequest").addClass("hidden");
+      $("#EmployeeRequestTitle").addClass("hidden");
+      searchProf(query);
+    }
+  });
+}
+
+function searchEmployee(query) {
+  if(query[2] != undefined){
+    var search = "-1";
+    var parse = query[2].split(":");
+    if (parse[1].replace(/\s/g, '') != "") {
+      search = parse[1];
+    }
+
+    $.ajax({
+      url: "api/index.php/searchEmployee/" + search
+    }).done(function(data) {
+      printSearch(JSON.parse(data),true);
+    })
+
+    if (search != "-1") {
+      $("#SearchRequest").val(search);
+    }
+  }
 }
 
 function searchProf(query) {
@@ -75,7 +128,7 @@ function searchProf(query) {
     $.ajax({
       url: "api/index.php/search/" + search + "/" + height + "/" + hair + "/" + hobby + "/" + zip
     }).done(function(data) {
-      printSearch(JSON.parse(data));
+      printSearch(JSON.parse(data),false);
     })
 
     if (search != "-1") {
@@ -98,7 +151,7 @@ function searchProf(query) {
   }
 }
 
-function printSearch(data) {
+function printSearch(data,employee) {
   if (data != "Unvalid") {
     $.ajax({
       url: "api/index.php/getPermission"
@@ -128,6 +181,7 @@ function printSearch(data) {
           }
         });
       } else {
+        if(employee != true){
         $("#contentPanelSearchContent").html(" ");
         for (var i = 0; i < data.length; i++) {
           var pic = "";
@@ -144,7 +198,22 @@ function printSearch(data) {
           $("#contentPanelSearchContent").append(search);
         }
 
+      }else{
+        $("#contentPanelSearchContent").html(" ");
+        for (var i = 0; i < data.length; i++) {
+          var pic = "<img src='media/employee.svg' id='contentPanelProfile_ProfilePic'>";
+          var type = "";
+          if(data[i].Role == "Manager"){
+            type = "Manage"
+          }else if(data[i].Role == "CustRep"){
+            type = "CusRep"
+          }
+
+          var search = "<div class='searchContainer' onclick='{window.location.hash = " + '"' + "setting-" + data[i].Role + "-"+data[i].SSN+'"' + "; updateUrl();}'><div class ='searchProfPic'>" + pic + "</div><div class ='searchProfName'>" + data[i].FirstName + " " + data[i].LastName + "</div><div class ='searchProfAge'>" + type + "</div></div>";
+          $("#contentPanelSearchContent").append(search);
+        }
       }
+    }
     });
   }
 }

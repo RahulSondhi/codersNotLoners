@@ -33,6 +33,21 @@ function setupProfileButtons(name) {
   $("#contentPanelProfile_InteractionsLike").click(function() {
     likeProfile(name);
   });
+  $.ajax({
+    url: "api/index.php/loggedin"
+  }).done(function(keydata) {
+    var splitme = keydata.split(",")
+    var data = splitme[0];
+    var banana = splitme[1];
+    if(banana == "Manager" || banana == "CustRep"){
+      $("#contentPanelProfile_InteractionsSettings").removeClass("hidden");
+      $("#contentPanelProfile_InteractionsSettings").click(function(){
+        window.location.hash = 'setting-customer-'+name;
+      });
+    }else{
+      $("#contentPanelProfile_InteractionsSettings").addClass("hidden");
+    }
+  });
 }
 
 function likeProfile(name) {

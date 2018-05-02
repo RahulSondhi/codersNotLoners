@@ -37,8 +37,8 @@ function login($body){
 
     if($count>0){
       $role = mysqli_fetch_assoc($result);
-      $_SESSION['role'] = $role;
-      print_r(JSON_encode($role));
+      $_SESSION['role'] = $role['Role'];
+      print_r(JSON_encode($_SESSION['role']));
     }else{
       $_SESSION['role'] = 'customer';
       print_r(JSON_encode("customer"));
@@ -99,12 +99,12 @@ function getPermission(){
   $role = mysqli_fetch_assoc($result);
   $count=mysqli_num_rows($result);
   if($count>0){
-    $_SESSION['role'] = $role;
+    $_SESSION['role'] = $role['Role'];
   }else{
     $role = 'customer';
     $_SESSION['role'] = $role;
   }
-  print_r(JSON_encode($role));
+  print_r(JSON_encode($_SESSION['role']));
 }
 
 function loggedin(){
@@ -151,72 +151,5 @@ function logout(){
   $_SESSION['SSN'] = "";
   $_SESSION['username'] = "";
   $_SESSION['role'] = "";
-}
-
-function makeAccount(){
-  global $body;
-  include("start.php");
-  session_start();
-
-  $data = json_decode($body);
-  $SSN= $data->SSN;
-  $Password= $data->Password;
-  $FirstName= $data->FirstName;
-  $LastName= $data->LastName;
-  $Email= $data->Email;
-  $Street= $data->Street;
-  $City= $data->City;
-  $State= $data->State;
-  $Zip= $data->Zip;
-  $Telephone= $data->Telephone;
-  $time = date('Y-m-d H:i:s');
-  $PPP = "User-User";
-  $Rating = 0;
-
-  $sql = "INSERT INTO Person VALUES ('$SSN', '$Password', '$FirstName', '$LastName', '$Street', '$City', '$State', '$Zip', '$Email', '$Telephone');";
-  if (mysqli_query($conn, $sql)) {
-    $sql = "INSERT INTO User VALUES ('$SSN', '$PPP', '$Rating', '$time');";
-    if (mysqli_query($conn, $sql)) {
-      print_r(JSON_encode("New"));
-    } else {
-      print_r(JSON_encode("Error:" . mysqli_error($conn)));
-    }
-  } else {
-    print_r(JSON_encode("Error:" . mysqli_error($conn)));
-  }
-}
-
-function makeProfile(){
-  global $body;
-  include("start.php");
-  session_start();
-
-  $data = json_decode($body);
-  $SSN = $_SESSION['SSN'];
-  $ProfileID= $data->ProfileID;
-  $AgeRangeStart= $data->AgeRangeStart;
-  $AgeRangeEnd= $data->AgeRangeEnd;
-  $Georange= $data->Georange;
-  $Hobbies= $data->Hobbies;
-  $Age= $data->Age;
-  $Sex= $data->Sex;
-  $Height= $data->Height;
-  $Weight= $data->Weight;
-  $HairColor= $data->HairColor;
-  $Cardnum= $data->Cardnum;
-  $Acctnum= $data->Acctnum;
-  $time = date('Y-m-d H:i:s');
-
-  $sql = "INSERT INTO Profile VALUES ('$ProfileID','$SSN', '$Age', '$AgeRangeStart', '$AgeRangeEnd', '$Georange', '$Sex', '$Hobbies', '$Height', '$Weight', '$HairColor','$time','$time');";
-  if (mysqli_query($conn, $sql)) {
-    $sql = "INSERT INTO Account VALUES ('$SSN', '$Cardnum', '$Acctnum','$time');";
-    if (mysqli_query($conn, $sql)) {
-      print_r(JSON_encode("New"));
-    } else {
-      print_r(JSON_encode("Error:" . mysqli_error($conn)));
-    }
-  } else {
-    print_r(JSON_encode("Error:" . mysqli_error($conn)));
-  }
 }
 ?>

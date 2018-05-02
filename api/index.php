@@ -10,6 +10,7 @@ require "$path/api/profile.php";
 require "$path/api/search.php";
 require "$path/api/manage.php";
 require "$path/api/dates.php";
+require "$path/api/settings.php";
 
 $app = new \Slim\Slim();
 $body= $app->request()->getBody();
@@ -87,6 +88,11 @@ $app->get('/search/:search/:height/:hair/:hobby/:zip', function($search,$height,
   exit;
 });
 
+$app->get('/searchEmployee/:search', function($search){
+  searchEmployee($search);
+  exit;
+});
+
 $app->get('/likeProfile/:likee', function($likee){
   likeProfile($likee);
   exit;
@@ -100,6 +106,11 @@ $app->get('/getProfiles', function(){
 $app->get('/getPermission', function(){
   getPermission();
   exit;
+});
+
+$app->get('/getSettings/:customer/:id', function($customer,$id){
+    getSettings($customer,$id);
+    exit;
 });
 
 $app->get('/getSalesReport/:month/:year', function($month,$year){

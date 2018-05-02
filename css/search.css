@@ -103,7 +103,7 @@
 
 .searchProfAge {
   font-size: 2rem;
-  margin-left: 5%;
+  margin-left: 4%;
   width: 10%;
   height: 90%;
   text-align: center;
@@ -134,4 +134,15 @@
   margin-top: 10%;
   font-size: 1.5rem;
   text-decoration: underline;
+}
+
+#EmployeeRequestTitle {
+  font-size: 1.2rem;
+}
+
+#EmployeeRequest {
+  margin: 0.1875rem;
+  font-size: 1rem;
+  margin-left: 40%;
+  width: 20%;
 }
