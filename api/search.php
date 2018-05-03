@@ -61,7 +61,7 @@ function searchProf($search,$height,$hair,$hobby,$zip,$filter){
         $info = "Unvalid";
       }
     }else{
-      $sql="SELECT M_F,ProfileID,Age FROM Person P,Profile WHERE ProfileID like '%$search%' AND Height like '%$height%' AND HairColor like '%$hair%' AND Hobbies like '%$hobby%' AND OwnerSSN = P.SSN AND P.Zipcode like '%$zip%'";
+      $sql="SELECT M_F,ProfileID,Age FROM Person P,Profile, User WHERE ProfileID like '%$search%' AND Height like '%$height%' AND HairColor like '%$hair%' AND Hobbies like '%$hobby%' AND OwnerSSN = P.SSN AND P.Zipcode like '%$zip%' ORDER BY CASE WHEN User.PPP='Super-User' THEN 1 WHEN User.PPP='Good-User' THEN 2 WHEN User.PPP='User-User' THEN 3 END ASC ";
       $result = mysqli_query($conn,$sql);
       $count= mysqli_num_rows($result);
 
