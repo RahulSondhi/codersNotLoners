@@ -21,7 +21,7 @@
 
 #DateProfile2 {
   position: absolute;
-  top: 15%;
+  top: 13%;
   left: 3%;
   width: 80%;
   height: 8%;
@@ -31,7 +31,7 @@
 
 #DateCustRep {
   position: absolute;
-  top: 35%;
+  top: 25%;
   left: 3%;
   width: 80%;
   height: 8%;
@@ -41,7 +41,7 @@
 
 #DateLocation {
   position: absolute;
-  top: 43%;
+  top: 33%;
   left: 3%;
   width: 80%;
   height: 8%;
@@ -51,7 +51,7 @@
 
 #DateTiming {
   position: absolute;
-  top: 51%;
+  top: 41%;
   left: 3%;
   width: 80%;
   height: 8%;
@@ -61,7 +61,7 @@
 
 #DateBookingFee {
   position: absolute;
-  top: 59%;
+  top: 49%;
   left: 3%;
   width: 80%;
   height: 8%;
@@ -71,7 +71,7 @@
 
 #DateRatingPerson1 {
   position: absolute;
-  top: 67%;
+  top: 57%;
   left: 3%;
   width: 80%;
   height: 8%;
@@ -81,13 +81,52 @@
 
 #DateRatingPerson2 {
   position: absolute;
-  top: 75%;
+  top: 65%;
   left: 3%;
   width: 80%;
   height: 8%;
   font-size: 1.5rem;
   overflow-x: hidden;
 }
+#DateButtonHolder{
+  width: 98%;
+    height: 24%;
+    left: 1%;
+    position: absolute;
+    top: 73%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: row;
+}
+
+#DateSaveButton,
+#DateCancelButton,
+#DateReceiptButton{
+  margin-top: 4%;
+  margin-bottom: 2%;
+  padding: 1%;
+  padding-top: 3%;
+  text-align: center;
+  width: 19%;
+      height: 40%;
+  margin-left: 5%;
+  margin-right: 5%;
+  background-color: #FF3B3F;
+  border-radius: 1rem;
+  color: white;
+  box-shadow: 0.3125rem 0.3125rem 0.3125rem grey;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+#DateSaveButton:active,
+#DateCancelButton:active,
+#DateReceiptButton:active{
+  box-shadow: 0 0.3125rem grey;
+  transform: translateY(0.250rem);
+}
+
 
 #dateInfoContainer {
   background-color: #EFEFEF;

@@ -1,4 +1,7 @@
+var filter = "";
+
 $(function() {
+  setFilters("Revenue", false);
 
   $("#SearchRequest").on("change", function(e) {
     setSearch()
@@ -26,10 +29,91 @@ $(function() {
 
   $('#EmployeeRequest').change(function() {
     var cb = $(this);
-    cb.val(cb.prop('checked'));
+    setMode("Employee", cb.prop('checked'));
+    setSearch();
+  });
+
+  $('#DatingRequest').change(function() {
+    var cb = $(this);
+    setMode("Dated", cb.prop('checked'));
+    setSearch();
+  });
+
+  $('#filterRevenueRequest').change(function() {
+    var cb = $(this);
+    setFilters("Revenue", cb.prop('checked'));
+    setSearch();
+  });
+
+  $('#filterActiveRequest').change(function() {
+    var cb = $(this);
+    setFilters("Active", cb.prop('checked'));
+    setSearch();
+  });
+
+  $('#filterRatingRequest').change(function() {
+    var cb = $(this);
+    setFilters("Rating", cb.prop('checked'));
     setSearch();
   });
 });
+
+function setFilters(type, set) {
+  switch (type) {
+    case "Revenue":
+      $('#filterRevenueRequest').prop('checked', set);
+      $('#filterRatingRequest').prop('checked', false);
+      $('#filterActiveRequest').prop('checked', false);
+      break;
+
+    case "Active":
+      $('#filterRevenueRequest').prop('checked', false);
+      $('#filterRatingRequest').prop('checked', false);
+      $('#filterActiveRequest').prop('checked', set);
+      break;
+
+    case "Rating":
+      $('#filterRevenueRequest').prop('checked', false);
+      $('#filterRatingRequest').prop('checked', set);
+      $('#filterActiveRequest').prop('checked', false);
+      break;
+
+    case "None":
+      $('#filterRevenueRequest').prop('checked', false);
+      $('#filterRatingRequest').prop('checked', false);
+      $('#filterActiveRequest').prop('checked', false);
+      break;
+  }
+  $('#filterRevenueRequest').val($('#filterRevenueRequest').prop('checked'));
+  $('#filterRatingRequest').val($('#filterRatingRequest').prop('checked'));
+  $('#filterActiveRequest').val($('#filterActiveRequest').prop('checked'));
+  if (set) {
+    filter = type;
+  } else {
+    filter = "None";
+  }
+}
+
+function setMode(type, set) {
+  switch (type) {
+    case "Employee":
+      $('#EmployeeRequest').prop('checked', set);
+      $('#DatingRequest').prop('checked', false);
+      break;
+
+    case "Dated":
+      $('#EmployeeRequest').prop('checked', false);
+      $('#DatingRequest').prop('checked', set);
+      break;
+
+    case "None":
+      $('#EmployeeRequest').prop('checked', false);
+      $('#DatingRequest').prop('checked', false);
+      break;
+  }
+  $('#EmployeeRequest').val($('#EmployeeRequest').prop('checked'));
+  $('#DatingRequest').val($('#DatingRequest').prop('checked'));
+}
 
 function setSearch() {
   var search = $("#SearchRequest").val();
@@ -38,11 +122,15 @@ function setSearch() {
   var hobby = $("#HobbyRequest").val();
   var zip = $("#ZipRequest").val();
 
+  console.log("I ran")
   if ($('#EmployeeRequest').val() == "true") {
-    window.location.hash = "search-employee-search:" + search;
+    window.location.hash = "search-employee-search:" + search + "-filter:" + filter;
+  } else if ($('#DatingRequest').val() == "true") {
+    window.location.hash = "search-dated-search:" + search + "-filter:" + filter;
   } else {
-    window.location.hash = "search-search:" + search + "-height:" + height + "-hair:" + hair + "-hobby:" + hobby + "-zip:" + zip;
+    window.location.hash = "search-search:" + search + "-height:" + height + "-hair:" + hair + "-hobby:" + hobby + "-zip:" + zip + "-filter:" + filter;
   }
+
 }
 
 function initSearch(query) {
@@ -51,36 +139,82 @@ function initSearch(query) {
     url: "api/index.php/getPermission"
   }).done(function(permission) {
     var person = JSON.parse(permission);
-    if (person == "Manager" || person == "CustRep") {
-      $("#EmployeeRequest").removeClass("hidden");
-      $("#EmployeeRequestTitle").removeClass("hidden");
+
+    if (person == "CustRep") {
+      $('#filterRevenueRequest').addClass("hidden");
+      $('#filterRevenueRequestTitle').addClass("hidden");
+      $('#DatingRequest').addClass("hidden");
+      $('#DatingRequestTitle').addClass("hidden");
+      $('#EmployeeRequest').removeClass("hidden");
+      $('#EmployeeRequestTitle').removeClass("hidden");
       if (query[1] == "employee") {
-        $('#EmployeeRequest').prop('checked', true);
-        $('#EmployeeRequest').val($('#EmployeeRequest').prop('checked'));
+        setMode("Employee", true);
         searchEmployee(query);
       } else {
         searchProf(query);
       }
+    } else if (person == "Manager") {
+      $('#filterRevenueRequest').removeClass("hidden");
+      $('#filterRevenueRequestTitle').removeClass("hidden");
+      $('#DatingRequest').removeClass("hidden");
+      $('#DatingRequestTitle').removeClass("hidden");
+      $('#EmployeeRequest').removeClass("hidden");
+      $('#EmployeeRequestTitle').removeClass("hidden");
+      if (query[1] == "employee") {
+        setMode("Employee", true);
+        searchEmployee(query);
+      } else if (query[1] == "dated") {
+        setMode("Dated", true);
+        searchDated(query);
+      } else {
+        searchProf(query);
+      }
     } else {
-      $("#EmployeeRequest").addClass("hidden");
-      $("#EmployeeRequestTitle").addClass("hidden");
+      $('#filterRevenueRequest').addClass("hidden");
+      $('#filterRevenueRequestTitle').addClass("hidden");
+      $('#DatingRequest').addClass("hidden");
+      $('#DatingRequestTitle').addClass("hidden");
+      $('#EmployeeRequest').addClass("hidden");
+      $('#EmployeeRequestTitle').addClass("hidden");
       searchProf(query);
     }
   });
 }
 
 function searchEmployee(query) {
-  if(query[2] != undefined){
+  if (query[2] != undefined && query[3] != undefined) {
     var search = "-1";
     var parse = query[2].split(":");
-    if (parse[1].replace(/\s/g, '') != "") {
+    var parse2 = query[2].split(":");
+    if (parse[1].replace(/\s/g, '') != "" && parse2[1].replace(/\s/g, '') != "") {
       search = parse[1];
     }
 
     $.ajax({
-      url: "api/index.php/searchEmployee/" + search
+      url: "api/index.php/searchEmployee/" + search + "/" + filter
     }).done(function(data) {
-      printSearch(JSON.parse(data),true);
+      printSearch(JSON.parse(data), true);
+    })
+
+    if (search != "-1") {
+      $("#SearchRequest").val(search);
+    }
+  }
+}
+
+function searchDated(query) {
+  if (query[2] != undefined && query[3] != undefined) {
+    var search = "-1";
+    var parse = query[2].split(":");
+    var parse2 = query[2].split(":");
+    if (parse[1].replace(/\s/g, '') != "" && parse2[1].replace(/\s/g, '') != "") {
+      search = parse[1];
+    }
+
+    $.ajax({
+      url: "api/index.php/searchDated/" + search + "/" + filter
+    }).done(function(data) {
+      printSearch(JSON.parse(data), false);
     })
 
     if (search != "-1") {
@@ -125,34 +259,33 @@ function searchProf(query) {
         }
         break;
     }
+  }
+  $.ajax({
+    url: "api/index.php/search/" + search + "/" + height + "/" + hair + "/" + hobby + "/" + zip + "/" + filter
+  }).done(function(data) {
+    printSearch(JSON.parse(data), false);
+  })
 
-    $.ajax({
-      url: "api/index.php/search/" + search + "/" + height + "/" + hair + "/" + hobby + "/" + zip
-    }).done(function(data) {
-      printSearch(JSON.parse(data),false);
-    })
+  if (search != "-1") {
+    $("#SearchRequest").val(search);
+  }
+  if (height != "-1") {
+    $("#HeightRequest").val(height);
+  }
+  if (hair != "-1") {
+    $("#HairRequest").val(hair);
+  }
 
-    if (search != "-1") {
-      $("#SearchRequest").val(search);
-    }
-    if (height != "-1") {
-      $("#HeightRequest").val(height);
-    }
-    if (hair != "-1") {
-      $("#HairRequest").val(hair);
-    }
+  if (hobby != "-1") {
+    $("#HobbyRequest").val(hobby);
+  }
 
-    if (hobby != "-1") {
-      $("#HobbyRequest").val(hobby);
-    }
-
-    if (zip != "-1") {
-      $("#ZipRequest").val(zip);
-    }
+  if (zip != "-1") {
+    $("#ZipRequest").val(zip);
   }
 }
 
-function printSearch(data,employee) {
+function printSearch(data, employee) {
   if (data != "Unvalid") {
     $.ajax({
       url: "api/index.php/getPermission"
@@ -182,39 +315,39 @@ function printSearch(data,employee) {
           }
         });
       } else {
-        if(employee != true){
-        $("#contentPanelSearchContent").html(" ");
-        for (var i = 0; i < data.length; i++) {
-          var pic = "";
-          var sex = "";
+        if (employee != true) {
+          $("#contentPanelSearchContent").html(" ");
+          for (var i = 0; i < data.length; i++) {
+            var pic = "";
+            var sex = "";
 
-          if (data[i].M_F == "Female") {
-            pic = "<img src='media/women.svg' id='contentPanelProfile_ProfilePic'>";
-            sex = "/F";
-          } else {
-            pic = "<img src='media/men.svg' id='contentPanelProfile_ProfilePic'>";
-            sex = "/M"
-          }
-          var search = "<div class='searchContainer' onclick='{window.location.hash = " + '"' + "profile-" + data[i].ProfileID + '"' + "; updateUrl();}'><div class ='searchProfPic'>" + pic + "</div><div class ='searchProfName'>" + data[i].ProfileID + "</div><div class ='searchProfAge'>" + data[i].Age + sex + "</div></div>";
-          $("#contentPanelSearchContent").append(search);
-        }
-
-      }else{
-        $("#contentPanelSearchContent").html(" ");
-        for (var i = 0; i < data.length; i++) {
-          var pic = "<img src='media/employee.svg' id='contentPanelProfile_ProfilePic'>";
-          var type = "";
-          if(data[i].Role == "Manager"){
-            type = "Manage"
-          }else if(data[i].Role == "CustRep"){
-            type = "CusRep"
+            if (data[i].M_F == "Female") {
+              pic = "<img src='media/women.svg' id='contentPanelProfile_ProfilePic'>";
+              sex = "/F";
+            } else {
+              pic = "<img src='media/men.svg' id='contentPanelProfile_ProfilePic'>";
+              sex = "/M"
+            }
+            var search = "<div class='searchContainer' onclick='{window.location.hash = " + '"' + "profile-" + data[i].ProfileID + '"' + "; updateUrl();}'><div class ='searchProfPic'>" + pic + "</div><div class ='searchProfName'>" + data[i].ProfileID + "</div><div class ='searchProfAge'>" + data[i].Age + sex + "</div></div>";
+            $("#contentPanelSearchContent").append(search);
           }
 
-          var search = "<div class='searchContainer' onclick='{window.location.hash = " + '"' + "setting-" + data[i].Role + "-"+data[i].SSN+'"' + "; updateUrl();}'><div class ='searchProfPic'>" + pic + "</div><div class ='searchProfName'>" + data[i].FirstName + " " + data[i].LastName + "</div><div class ='searchProfAge'>" + type + "</div></div>";
-          $("#contentPanelSearchContent").append(search);
+        } else {
+          $("#contentPanelSearchContent").html(" ");
+          for (var i = 0; i < data.length; i++) {
+            var pic = "<img src='media/employee.svg' id='contentPanelProfile_ProfilePic'>";
+            var type = "";
+            if (data[i].Role == "Manager") {
+              type = "Manage"
+            } else if (data[i].Role == "CustRep") {
+              type = "CusRep"
+            }
+
+            var search = "<div class='searchContainer' onclick='{window.location.hash = " + '"' + "setting-" + data[i].Role + "-" + data[i].SSN + '"' + "; updateUrl();}'><div class ='searchProfPic'>" + pic + "</div><div class ='searchProfName'>" + data[i].FirstName + " " + data[i].LastName + "</div><div class ='searchProfAge'>" + type + "</div></div>";
+            $("#contentPanelSearchContent").append(search);
+          }
         }
       }
-    }
     });
   }
 }

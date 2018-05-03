@@ -235,16 +235,47 @@
           </div>
           <div id="contentPanelSearchFilters">
             <div id="contentPanelSearchFiltersContainer">
-              <div class="filterTitle">Height</div>
+              <div class="filterTitle">Filters</div>
+              <hr>
+              <div class="filterSubTitle">Height</div>
               <input id="HeightRequest" class="filterInput" type="text" name="HeightRequest">
-              <div class="filterTitle">Hair Color</div>
+              <div class="filterSubTitle">Hair Color</div>
               <input id="HairRequest" class="filterInput" type="text" name="HairRequest">
-              <div class="filterTitle">Hobbies</div>
+              <div class="filterSubTitle">Hobbies</div>
               <input id="HobbyRequest" class="filterInput" type="text" name="HobbyRequest">
-              <div class="filterTitle">Zip Code</div>
+              <div class="filterSubTitle">Zip Code</div>
               <input id="ZipRequest" class="filterInput" type="text" name="ZipRequest">
-              <div id="EmployeeRequestTitle" class="filterTitle hidden">Employee Mode</div>
-              <input id="EmployeeRequest" type="checkbox" class="hidden" value="FALSE">
+
+              <div id="ModeFilters">
+                <div class="checkboxContainer">
+                  <div class="filterTitleBox" id="EmployeeRequestTitle">Employee</div>
+                  <input id="EmployeeRequest" type="checkbox" value="FALSE">
+                </div>
+
+                <div class="checkboxContainer">
+                  <div class="filterTitleBox" id="DatingRequestTitle">Dated</div>
+                  <input id="DatingRequest" type="checkbox" value="FALSE">
+                </div>
+              </div>
+
+              <div class="filterTitle">Sorting</div>
+              <hr>
+              <div id="SearchFilters">
+                <div class="checkboxContainer">
+                  <div id="filterRevenueRequestTitle" class="filterTitleBox">Revenue</div>
+                  <input id="filterRevenueRequest" type="checkbox" value="FALSE">
+                </div>
+
+                <div class="checkboxContainer">
+                  <div id="filterActiveRequestTitle" class="filterTitleBox">Active</div>
+                  <input id="filterActiveRequest" type="checkbox" value="FALSE">
+                </div>
+
+                <div class="checkboxContainer">
+                  <div id="filterRatingRequestTitle" class="filterTitleBox">Rating</div>
+                  <input id="filterRatingRequest" type="checkbox" value="FALSE">
+                </div>
+              </div>
             </div>
           </div>
           <div id="contentPanelSearchContent"></div>
@@ -260,13 +291,17 @@
             <div id="DateBookingFee"></div>
             <div id="DateRatingPerson1"></div>
             <div id="DateRatingPerson2"></div>
+            <div id="DateButtonHolder">
+              <div id="DateSaveButton">Save</div>
+              <div id="DateCancelButton">Cancel</div>
+              <div id="DateReceiptButton">Receipt</div>
+            </div>
           </div>
           <div id="DateComments">
             <div id="DateCommentsContent"></div>
             <input id="DateCommentsComment" type="text">
           </div>
         </div>
-
         <div id="contentPanelManage">
           <div id="contentPanelManageButtonHolder">
             <div class="ManageTitle">Mailing List</div>

@@ -90,13 +90,18 @@ $app->get('/logout', function(){
   exit;
 });
 
-$app->get('/search/:search/:height/:hair/:hobby/:zip', function($search,$height,$hair,$hobby,$zip){
-  searchProf($search,$height,$hair,$hobby,$zip);
+$app->get('/search/:search/:height/:hair/:hobby/:zip/:filter', function($search,$height,$hair,$hobby,$zip,$filter){
+  searchProf($search,$height,$hair,$hobby,$zip,$filter);
   exit;
 });
 
-$app->get('/searchEmployee/:search', function($search){
-  searchEmployee($search);
+$app->get('/searchEmployee/:search/:filter', function($search,$filter){
+  searchEmployee($search,$filter);
+  exit;
+});
+
+$app->get('/searchDated/:search/:filter', function($search,$filter){
+  searchDated($search,$filter);
   exit;
 });
 
