@@ -238,7 +238,7 @@ function deleteAccount($who){
   $permissionAdmin = ($_SESSION['role'] == "CustRep" || $_SESSION['role'] == "Manager");
 
   if($who == $_SESSION['SSN'] || $permissionAdmin == true){
-      $sql="DELETE Account, Person, Profile, User, Date, Likes, Referral, SuggestedBy FROM Account, Person, Profile, User, Date, Likes, Referral, SuggestedBy WHERE Person.SSN='$who' AND Account.OwnerSSN=Person.SSN AND Account.OwnerSSN=Profile.OwnerSSN AND Profile.OwnerSSN=User.SSN ";
+      $sql="DELETE FROM Person WHERE Person.SSN='$who'";
       if (mysqli_query($conn, $sql)) {
         if($who == $_SESSION['SSN']){
           $send = true;
@@ -248,6 +248,7 @@ function deleteAccount($who){
       }else{
         print_r(JSON_encode("Error:" . mysqli_error($conn)));
       }
+      echo($who);
   }
 
   print_r(JSON_encode($send));
