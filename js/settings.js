@@ -342,8 +342,10 @@ function loadSettings() {
         $("#deleteAccountButton").addClass("NoUsable");
         if (keydata[1] == 'Manager') {
           $("#saveSettingsButton").removeClass("NoUsable");
+          $("#deleteAccountButton").removeClass("NoUsable");
         } else {
           $("#saveSettingsButton").addClass("NoUsable");
+          $("#deleteAccountButton").addClass("NoUsable");
         }
         organizeSettings(keydata[1], (keydata[3])[0], keydata[2]);
         break;

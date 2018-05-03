@@ -184,5 +184,10 @@ $app->get('/makeRefer/:profile1/:profile2',function($profile1,$profile2){
   exit;
 });
 
+$app->get('/getDateSuggestions/:profile',function($profile){
+  getDateSuggestions($profile);
+  exit;
+});
+
 $app->run();
 ?>

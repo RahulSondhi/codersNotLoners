@@ -1,5 +1,25 @@
 <?php
 
+function getDateSuggestions($profile){
+  include("start.php");
+  session_start();
+  $info = array();
+  $permissionAdmin = ($_SESSION['role'] == "Manager"||$_SESSION['role'] == "CustRep");
+
+  if($permissionAdmin){
+    $sql="SELECT DISTINCT ProfileID FROM Referral r,Profile WHERE (r.ProfileB = '$profile' AND ProfileID = r.profileC)OR( r.ProfileC = '$profile' AND ProfileID = r.profileB)";
+    $result = mysqli_query($conn,$sql);
+
+    while($row = mysqli_fetch_assoc($result)){
+        $info[] = $row;
+    }
+
+    print_r(JSON_encode($info));
+  }else{
+    print_r(JSON_encode("Permission Denied"));
+  }
+}
+
 function getSalesReport($month,$year){
   include("start.php");
   session_start();

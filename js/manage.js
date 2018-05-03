@@ -20,6 +20,10 @@ function initManage(){
   $("#revenueSummaryDateButton").click(function(){
     getRevenueSummary(false);
   });
+
+  $("#dateSuggestionsButton").click(function(){
+    getDateSuggestions();
+  });
 }
 
 function cleanManage(){
@@ -46,6 +50,29 @@ function cleanManage(){
     $("#manageRevenueSummaryUser").val("");
     $("#manageRevenueSummaryDate").val("");
   });
+}
+
+function getDateSuggestions(){
+  var pp = $("#manageDateSuggestions").val();
+  if(pp != ""){
+    $.ajax({
+      url: "api/index.php/getDateSuggestions/"+pp
+    }).done(function(data) {
+      var email = JSON.parse(data);
+      console.log(email)
+      var send = "User,";
+
+      for(var i = 0;i<email.length;i++){
+        var obj = email[i];
+        if(i < email.length-1){
+          send += (obj.ProfileID+",");
+        }else{
+          send += (obj.ProfileID);
+        }
+      }
+      printManageOut(send);
+    });
+  }
 }
 
 function getMailingList(){
