@@ -1,0 +1,116 @@
+.ManageInput {
+  width: 90%;
+  height: 6.5%;
+  text-align: center;
+  padding: 0;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  overflow-x: hidden;
+  margin-left: 5%;
+  margin-bottom: 5%;
+  font-size: 1.25rem;
+  border-width: 0.1rem;
+}
+
+.ManageTitle {
+  width: 90%;
+    height: 7%;
+    text-align: left;
+    padding-top: 2%;
+    overflow-x: hidden;
+    margin-left: 1%;
+    margin-top: 0.5%;
+    margin-bottom: 0%;
+    font-size: 2rem;
+}
+
+.ManageSubTitle {
+  width: 90%;
+  height: 7%;
+  text-align: left;
+  padding-top: 2%;
+  overflow-x: hidden;
+  margin-left: 5%;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  font-size: 1.5rem;
+}
+
+
+#contentPanelManageButtonHolder {
+  width: 44%;
+  left: 3%;
+  position: absolute;
+  top: 2%;
+  height: 94%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 1rem;
+
+  /* border-style: solid;
+  border-width: 0.5rem;
+  border-color: #FF3B3F; */
+}
+
+#contentPanelManageButtonHolder hr{
+  border-width: 0.2rem;
+  font-size: 0.25rem;
+  margin-bottom: 3%;
+}
+
+#contentPanelManageListHolder {
+  width: 44%;
+  right: 3%;
+  position: absolute;
+  top: 2%;
+  height: 94%;
+}
+
+.ManageList {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0;
+  border-style: solid;
+  border-radius: 1rem;
+  border-width: 0.5rem;
+  border-color: #FF3B3F;
+  border-radius: 1rem;
+  resize: none;
+  font-size: 1.5rem;
+}
+
+.ManageButton {
+  width: 50%;
+  height: 9%;
+  padding: 2%;
+  padding-top: 4%;
+  margin: %;
+  margin-bottom: 5%;
+  margin-left: 22%;
+  border-radius: 1rem;
+  background-color: #FF3B3F;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  box-shadow: 0.3125rem 0.3125rem 0.3125rem grey;
+  cursor: pointer;
+}
+
+.ManageButton:active {
+  box-shadow: 0 0.3125rem grey;
+  transform: translateY(0.250rem);
+}
+
+textarea {
+    resize: none;
+}
+
+input[type="date"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
+
+input[type="month"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}

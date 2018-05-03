@@ -9,7 +9,7 @@
 #contentPanelSearchFilters {
   position: absolute;
   height: 73%;
-  width: 10%;
+  width: 20%;
   left: 5%;
   top: 17%;
   background-color: white;
@@ -22,8 +22,8 @@
 #contentPanelSearchContent {
   position: absolute;
   height: 73%;
-  width: 78%;
-  left: 17%;
+  width: 68%;
+  right: 5%;
   top: 17%;
   background-color: white;
   border-color: #FF3B3F;
@@ -131,7 +131,7 @@
   padding-top: 2%;
   overflow-x: hidden;
   margin-left: 5%;
-  margin-top: 10%;
+  margin-top: 0.5%;
   font-size: 1.5rem;
   text-decoration: underline;
 }

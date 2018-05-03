@@ -215,6 +215,7 @@ function updateUrl() {
   hideAllPages();
   switch (parse[0]) {
     case "#manage":
+      initManage();
       $("#contentPanelManage").removeClass("hidden");
       break;
     case "#search":

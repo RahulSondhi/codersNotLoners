@@ -130,6 +130,21 @@ $app->get('/deleteAccount/:who', function($who){
     exit;
 });
 
+$app->get('/getMailList', function(){
+    getMailList();
+    exit;
+});
+
+$app->get('/getDateDayRanking', function(){
+    getDateDayRanking();
+    exit;
+});
+
+$app->get('/getRevenueSummary/:param/:data', function($param,$data){
+    getRevenueSummary($param,$data);
+    exit;
+});
+
 $app->get('/getSalesReport/:month/:year', function($month,$year){
     getSalesReport($month,$year);
     exit;

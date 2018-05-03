@@ -11,12 +11,14 @@
   <script src="js/date.js"></script>
   <script src="js/search.js"></script>
   <script src="js/settings.js"></script>
+  <script src="js/manage.js"></script>
   <link rel="stylesheet" href="css/sky.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="css/search.css">
   <link rel="stylesheet" href="css/date.css">
   <link rel="stylesheet" href="css/settings.css">
+  <link rel="stylesheet" href="css/manage.css">
 </head>
 
 <body>
@@ -266,23 +268,47 @@
         </div>
 
         <div id="contentPanelManage">
+          <div id="contentPanelManageButtonHolder">
+            <div class="ManageTitle">Mailing List</div>
+            <hr>
+            <div id="mailingListButton" class="ManageButton">Generate Mailing List</div>
 
-          <button id="getSalesReportButton" type="button"> Get Sales report </button>
-          <button id="listAllUsersButton" type="button"> List All Users </button>
-          <button id="searchEmployeeButton" type="button"> Search Employee </button>
-          <button id="searchDateButton" type="button"> Search Date </button>
-          <button id="searchRevenueGeneratedButton" type="button"> Search Revenue Generated</button>
-          <button id="employeeMostRevenueButton" type="button"> Employee that generated the most revenue </button>
-          <button id="peopleWhoHaveGoneOutWithButton" type="button"> People who have gone out with a specific person </button>
+            <div class="ManageTitle">Date Suggestions</div>
+            <hr>
+            <div class="ManageSubTitle">User</div>
+            <input id="manageDateSuggestions" type="text" class="ManageInput">
+            <div id="dateSuggestionsButton" class="ManageButton">Generate Date Suggestions</div>
+
+            <div id="contentPanelManageManager">
+
+              <div class="ManageTitle">Sales Report</div>
+              <hr>
+              <div class="ManageSubTitle">Date</div>
+              <input id="manageSalesReport" type="month" class="ManageInput">
+              <div id="salesReportButton" class="ManageButton">Generate Sales Report</div>
+
+              <div class="ManageTitle">Revenue Summary by User</div>
+              <hr>
+              <div class="ManageSubTitle">User</div>
+              <input id="manageRevenueSummaryUser" type="text" class="ManageInput">
+              <div id="revenueSummaryUserButton" class="ManageButton">Generate Revenue Summary</div>
+
+              <div class="ManageTitle">Revenue Summary by Date</div>
+              <hr>
+              <div class="ManageSubTitle">Date</div>
+              <input id="manageRevenueSummaryDate" type="date" class="ManageInput">
+              <div id="revenueSummaryDateButton" class="ManageButton">Generate Revenue Summary</div>
+
+              <div class="ManageTitle">Days for Dates Ranking</div>
+              <hr>
+              <div id="dateDaysButton" class="ManageButton">Generate Ranking Date Days</div>
+            </div>
+          </div>
+          <div id="contentPanelManageListHolder">
+            <textarea id="contentPanelManageListHolderText" class="ManageList" readonly></textarea>
+          </div>
 
         </div>
-        <div id="getSalesReport"> </div>
-        <div id="listAllUsers"> </div>
-        <div id="searchEmployee"> </div>
-        <div id="searchDate"> </div>
-        <div id="searchRevenueGenerated"> </div>
-        <div id="employeeMostRevenue"> </div>
-        <div id="peopleWhoHaveGoneOutWith"> </div>
 
       </div>
       <div id="city"><img src="media/city.svg" id="cityImg"></div>
