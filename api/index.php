@@ -155,5 +155,22 @@ $app->get('/getSalesReport/:month/:year', function($month,$year){
     exit;
 });
 
+$app->get('/checkDate', function(){
+  checkingDate();
+  exit;
+});
+
+$app->post('/saveDate/:profile1/:profile2/:time',function($profile1,$profile2,$time){
+  global $body;
+
+  saveDate($body,$profile1,$profile2,$time);
+  exit;
+});
+
+$app->get('/removeDate/:profile1/:profile2/:time',function($profile1,$profile2,$time){
+  removeDate($profile1,$profile2,$time);
+  exit;
+});
+
 $app->run();
 ?>

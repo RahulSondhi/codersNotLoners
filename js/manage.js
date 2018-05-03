@@ -41,7 +41,6 @@ function cleanManage(){
       $("#contentPanelManageButtonHolder").addClass("hidden");
     }
 
-    $("#contentPanelManageListHolderText").val(" ");
     $("#manageSalesReport").val("");
     $("#manageDateSuggestions").val("");
     $("#manageRevenueSummaryUser").val("");

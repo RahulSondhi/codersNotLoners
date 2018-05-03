@@ -3,101 +3,38 @@
   top: 5%;
   left: 5%;
   padding-top: 3%;
-  width: 30%;
+  width: 44%;
   height: 20%;
   font-size: 3rem;
   text-align: center;
 }
 
-#DateProfile1 {
-  position: absolute;
-  top: 5%;
-  left: 3%;
-  width: 80%;
-  height: 8%;
+#DateProfile1,#DateProfile2,#DateCustRep,#DateLocation,#DateTiming,#DateBookingFee,#DateRatingPerson1,#DateRatingPerson2 {
+  margin-left: 5%;
+  width: 90%;
+  height: 25%;
   font-size: 1.5rem;
   overflow-x: hidden;
 }
 
-#DateProfile2 {
-  position: absolute;
-  top: 13%;
-  left: 3%;
-  width: 80%;
-  height: 8%;
-  font-size: 1.5rem;
-  overflow-x: hidden;
-}
-
-#DateCustRep {
-  position: absolute;
-  top: 25%;
-  left: 3%;
-  width: 80%;
-  height: 8%;
-  font-size: 1.5rem;
-  overflow-x: hidden;
-}
-
-#DateLocation {
-  position: absolute;
-  top: 33%;
-  left: 3%;
-  width: 80%;
-  height: 8%;
-  font-size: 1.5rem;
-  overflow-x: hidden;
-}
-
-#DateTiming {
-  position: absolute;
-  top: 41%;
-  left: 3%;
-  width: 80%;
-  height: 8%;
-  font-size: 1.5rem;
-  overflow-x: hidden;
-}
-
-#DateBookingFee {
-  position: absolute;
-  top: 49%;
-  left: 3%;
-  width: 80%;
-  height: 8%;
-  font-size: 1.5rem;
-  overflow-x: hidden;
-}
-
-#DateRatingPerson1 {
-  position: absolute;
-  top: 57%;
-  left: 3%;
-  width: 80%;
-  height: 8%;
-  font-size: 1.5rem;
-  overflow-x: hidden;
-}
-
-#DateRatingPerson2 {
-  position: absolute;
-  top: 65%;
-  left: 3%;
-  width: 80%;
-  height: 8%;
-  font-size: 1.5rem;
-  overflow-x: hidden;
-}
 #DateButtonHolder{
-  width: 98%;
+    width: 98%;
     height: 24%;
-    left: 1%;
-    position: absolute;
-    top: 73%;
+    margin-left: 1%;
+    margin-bottom: 3%;
     overflow-x: hidden;
     overflow-y: hidden;
     display: flex;
     flex-direction: row;
+}
+
+.dateInput{
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 2%;
+  padding: 0;
+  border-width: 0.1rem;
+  font-size: 1.5rem;
 }
 
 #DateSaveButton,
@@ -109,9 +46,9 @@
   padding-top: 3%;
   text-align: center;
   width: 19%;
-      height: 40%;
-  margin-left: 5%;
-  margin-right: 5%;
+  height: 40%;
+  margin-left: 7%;
+  margin-right: 7%;
   background-color: #FF3B3F;
   border-radius: 1rem;
   color: white;
@@ -135,11 +72,13 @@
   border-width: 0.5rem;
   z-index: 1;
   border-color: #FF3B3F;
-  width: 30%;
+  width: 44%;
   left: 5%;
   top: 28%;
   height: 62%;
   position: absolute;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 #DateComments {
