@@ -188,7 +188,7 @@ function getSettings($role,$id){
   }
 
   $packet[] = $return;
-  $packet[] = $role;
+  $packet[] = $_SESSION['role'];
   $packet[] = $me;
   $packet[] = $info;
   print_r(JSON_encode($packet));

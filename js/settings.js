@@ -309,7 +309,15 @@ function loadSettings() {
     url: "api/index.php/getSettings/" + who.customer + "/" + who.profile
   }).done(function(data) {
     var keydata = JSON.parse(data);
-
+    var helpme = window.location.hash;
+    var killme = helpme.split("-");
+    if(killme[1] == undefined){
+      switch(keydata[0]){
+        case "1": killme[1] = "customer"; break;
+        case "2": killme[1] = "CustRep"; break;
+        case "3": killme[1] = "Manager"; break;
+      }
+    }
     switch (keydata[0]) {
       case "0":
         window.location.hash = 'setting';
@@ -320,7 +328,7 @@ function loadSettings() {
         $("#deleteProfileButton").removeClass("NoUsable");
         $("#contentPanelSettingsProfile").removeClass("hidden");
         $("#contentPanelSettingsEmployee").addClass("hidden");
-        organizeSettings(keydata[1], (keydata[3])[0], keydata[2]);
+        organizeSettings(killme[1], (keydata[3])[0], keydata[2]);
         break;
       case "2":
         $("#deleteProfileButton").addClass("NoUsable");
@@ -333,7 +341,7 @@ function loadSettings() {
           $("#saveSettingsButton").addClass("NoUsable");
           $("#deleteAccountButton").addClass("NoUsable");
         }
-        organizeSettings(keydata[1], (keydata[3])[0], keydata[2]);
+        organizeSettings(killme[1], (keydata[3])[0], keydata[2]);
         break;
       case "3":
         $("#contentPanelSettingsProfile").addClass("hidden");
@@ -347,7 +355,7 @@ function loadSettings() {
           $("#saveSettingsButton").addClass("NoUsable");
           $("#deleteAccountButton").addClass("NoUsable");
         }
-        organizeSettings(keydata[1], (keydata[3])[0], keydata[2]);
+        organizeSettings(killme[1], (keydata[3])[0], keydata[2]);
         break;
     }
     $("#contentPanelSettingsContainer").animate({
@@ -367,6 +375,7 @@ function organizeSettings(level, data, me) {
   $("#SettingsState").val(data.State);
   $("#SettingsZip").val(parseInt(data.Zipcode));
   $("#SettingsTelephone").val(data.Telephone);
+  console.log(level)
   switch (level) {
     case "customer":
       $("#SettingsProfileID").val(data.ProfileID);

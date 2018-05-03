@@ -147,10 +147,6 @@
   font-size: 1.5rem;
 }
 
-#EmployeeRequestTitle {
-  font-size: 1.2rem;
-}
-
 #EmployeeRequest {
   margin: 0.1875rem;
   font-size: 1rem;
@@ -204,4 +200,5 @@
   margin: 0.1875rem;
   font-size: 1rem;
   width: 20%;
+  margin-top: 0.7rem;
 }
