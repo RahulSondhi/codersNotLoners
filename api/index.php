@@ -172,5 +172,17 @@ $app->get('/removeDate/:profile1/:profile2/:time',function($profile1,$profile2,$
   exit;
 });
 
+$app->post('/makeDate',function(){
+  global $body;
+
+  makeDate($body);
+  exit;
+});
+
+$app->get('/makeRefer/:profile1/:profile2',function($profile1,$profile2){
+  makeRefer($profile1,$profile2);
+  exit;
+});
+
 $app->run();
 ?>

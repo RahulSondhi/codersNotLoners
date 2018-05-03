@@ -12,6 +12,9 @@ function loadProfile(name) {
       }).done(function(data3) {
         organizeProfileDates(JSON.parse(data3));
         $("#contentPanelProfile").removeClass("hidden");
+        $("#contentPanelProfile_centerBoxHobbies").removeClass("hidden");
+        $("#contentPanelProfile_centerBoxCharacteristics").removeClass("hidden");
+        $("#contentPanelProfile_centerBoxDateMake").addClass("hidden");
         if (name == "me") {
           $("#contentPanelProfile_Interactions").removeClass("hidden");
           $("#contentPanelProfile_InteractionsDate").addClass("NoUsable");
@@ -33,21 +36,107 @@ function setupProfileButtons(name) {
   $("#contentPanelProfile_InteractionsLike").click(function() {
     likeProfile(name);
   });
+
+  $("#contentPanelProfile_InteractionsDate").click(function() {
+    makeDateProfile(name);
+    $("#contentPanelProfile_centerBoxHobbies").addClass("hidden");
+    $("#contentPanelProfile_centerBoxCharacteristics").addClass("hidden");
+    $("#DateMakeCustRep").removeClass("hidden");
+    $("#DateMakeLocation").removeClass("hidden");
+    $("#DateMakeBookingFee").removeClass("hidden");
+    $("#DateMakeButton").removeClass("hidden");
+    $("#ReferMakeButton").addClass("hidden");
+    $("#contentPanelProfile_centerBoxDateMake").removeClass("hidden");
+  });
+
+  $("#contentPanelProfile_InteractionsRefer").click(function() {
+    makeDateProfile("");
+    $("#contentPanelProfile_centerBoxHobbies").addClass("hidden");
+    $("#contentPanelProfile_centerBoxCharacteristics").addClass("hidden");
+    $("#DateMakeCustRep").addClass("hidden");
+    $("#DateMakeLocation").addClass("hidden");
+    $("#DateMakeBookingFee").addClass("hidden");
+    $("#DateMakeButton").addClass("hidden");
+    $("#ReferMakeButton").removeClass("hidden");
+    $("#contentPanelProfile_centerBoxDateMake").removeClass("hidden");
+  });
+
+  $("#DateMakeButton").click(function() {
+    var toSend = {}
+    toSend.profile1 = $("#dateMakeProfile1").val();
+    toSend.Location = $("#dateMakeLocation").val();
+    toSend.BookingFee = $("#dateMakeBookingFee").val();
+    toSend.customerRep = $("#dateMakeCustRep").val();
+
+      $.ajax({
+        type: "post",
+        url: "api/index.php/makeDate",
+        data: JSON.stringify(toSend),
+        dataType: "json"
+      }).done(function(banana) {
+        console.log(banana)
+        $("#contentPanelProfile_centerBoxHobbies").removeClass("hidden");
+        $("#contentPanelProfile_centerBoxCharacteristics").removeClass("hidden");
+        $("#contentPanelProfile_centerBoxDateMake").addClass("hidden");
+      });
+  });
+
+  $("#ReferMakeButton").click(function() {
+    var toSend = {}
+    toSend.profile1 = $("#dateMakeProfile1").val();
+    toSend.profile2 = $("#dateMakeProfile2").val();
+
+      $.ajax({
+        url: "api/index.php/makeRefer/"+toSend.profile1+"/"+toSend.profile2,
+      }).done(function(banana) {
+        console.log(banana)
+        $("#contentPanelProfile_centerBoxHobbies").removeClass("hidden");
+        $("#contentPanelProfile_centerBoxCharacteristics").removeClass("hidden");
+        $("#contentPanelProfile_centerBoxDateMake").addClass("hidden");
+      });
+  });
+
   $.ajax({
     url: "api/index.php/loggedin"
   }).done(function(keydata) {
     var splitme = keydata.split(",")
     var data = splitme[0];
     var banana = splitme[1];
-    if(banana == "Manager" || banana == "CustRep"){
+    if (banana == "Manager" || banana == "CustRep") {
       $("#contentPanelProfile_InteractionsSettings").removeClass("hidden");
-      $("#contentPanelProfile_InteractionsSettings").click(function(){
-        window.location.hash = 'setting-customer-'+name;
+      $("#contentPanelProfile_InteractionsSettings").click(function() {
+        window.location.hash = 'setting-customer-' + name;
       });
-    }else{
+    } else {
       $("#contentPanelProfile_InteractionsSettings").addClass("hidden");
     }
   });
+}
+
+function makeDateProfile(name) {
+  if (name == "") {
+    //Testing Portion
+    $("#dateMakeProfile1").val("DesiraeBerg");
+    $("#dateMakeProfile2").val("Brenna_Berlin");
+    $("#dateMakeLocation").val("Jasmine");
+    $("#dateMakeBookingFee").val(69);
+    $("#dateMakeCustRep").val("222-22-2222");
+    $("#DateMakeProfile2").removeClass("hidden");
+    //////////////////
+  } else {
+    //Testing Portion
+    $("#dateMakeProfile1").val(name);
+    $("#dateMakeProfile2").val("ME");
+    $("#dateMakeLocation").val("Jasmine");
+    $("#dateMakeBookingFee").val(69);
+    $("#dateMakeCustRep").val("222-22-2222");
+    $("#DateMakeProfile2").addClass("hidden");
+    //////////////////
+  }
+
+  $("#contentPanelProfile_centerBoxHobbies").removeClass("hidden");
+  $("#contentPanelProfile_centerBoxCharacteristics").removeClass("hidden");
+  $("#contentPanelProfile_centerBoxDateMake").addClass("hidden");
 }
 
 function likeProfile(name) {

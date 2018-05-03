@@ -98,12 +98,11 @@ function saveDate($body,$profile1,$profile2,$time){
     $info = array();
     $data = json_decode($body);
     $location= $data->Location;
-    $timing= $data->timing;
     $BookingFee= $data->BookingFee;
     $Rating1= $data->dateRatingPerson1;
     $Rating2= $data->dateRatingPerson2;
 
-    $sql="UPDATE Date SET Location = '$location', Date_Time = '$timing', BookingFee = '$BookingFee', User1Rating = '$Rating1', User2Rating = '$Rating2' WHERE Profile1='$profile1' AND Profile2='$profile2' AND Date_Time='$time'";
+    $sql="UPDATE Date SET Location = '$location', BookingFee = '$BookingFee', User1Rating = '$Rating1', User2Rating = '$Rating2' WHERE Profile1='$profile1' AND Profile2='$profile2' AND Date_Time='$time'";
 
     if ($conn->query($sql) === TRUE) {
       $info = "Valid";
@@ -136,6 +135,51 @@ function removeDate($profile1,$profile2,$time){
 
       print_r(JSON_encode($info));
     }
+  }
+}
+
+function makeDate($body){
+  global $body;
+  include("start.php");
+  session_start();
+
+    $data = json_decode($body);
+    $profile1= $data->profile1;
+    $profile2= $_SESSION['username'];
+    $customerRep= $data->customerRep;
+    $time= strtotime("+7 day");
+    $location= $data->Location;
+    $BookingFee= $data->BookingFee;
+
+if(profileExists($profile1) && profileExists($profile2)){
+
+    $sql="INSERT INTO Date VALUES ('$profile1','$profile2','$customerRep',CURRENT_TIMESTAMP(),'$location','$BookingFee','Comment Here','3','3')";
+
+    if ($conn->query($sql) === TRUE) {
+      $info = "Valid";
+    }else{
+      $info = "Unvalid";
+    }
+
+  print_r(JSON_encode($info));
+}
+}
+
+function makeRefer($profile1,$profile2){
+  include("start.php");
+  session_start();
+  $profile = $_SESSION['username'];
+
+if(profileExists($profile1) && profileExists($profile2)){
+  $sql="INSERT INTO Referral VALUES ('$profile','$profile1','$profile2',CURRENT_TIMESTAMP());";
+
+  if ($conn->query($sql) === TRUE) {
+    $info = "Valid";
+  }else{
+    $info = "Unvalid";
+  }
+
+  print_r(JSON_encode($info));
   }
 }
 ?>

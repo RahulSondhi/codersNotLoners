@@ -26,7 +26,6 @@ function loadDate() {
         $("#DateReceiptButton").removeClass("NoUsable");
 
         $("#dateLocation").prop("readonly", false);
-        $("#dateTiming").prop("readonly", false);
         $("#dateBookingFee").prop("readonly", false);
         $("#dateCustRep").prop("readonly", true);
         $("#dateRatingPerson1").prop("readonly", false);
@@ -38,7 +37,6 @@ function loadDate() {
           $("#DateReceiptButton").addClass("NoUsable");
 
           $("#dateLocation").prop("readonly", false);
-          $("#dateTiming").prop("readonly", false);
           $("#dateBookingFee").prop("readonly", false);
           $("#dateCustRep").prop("readonly", true);
           if(dataME==dateInfo1.Profile1){
@@ -55,7 +53,6 @@ function loadDate() {
           $("#DateReceiptButton").addClass("NoUsable");
 
           $("#dateLocation").prop("readonly", true);
-          $("#dateTiming").prop("readonly", true);
           $("#dateBookingFee").prop("readonly", true);
           $("#dateCustRep").prop("readonly", true);
           $("#dateRatingPerson1").prop("readonly", true);
@@ -92,7 +89,6 @@ function DateCancel(infoNeeded){
 function DateSave(infoNeeded){
   var toSend = {};
   toSend.Location = $("#dateLocation").val();
-  toSend.timing = $("#dateTiming").val();
   toSend.BookingFee = $("#dateBookingFee").val();
   // toSend.CustRep = $("#dateCustRep").val();
   toSend.dateRatingPerson1 = $("#dateRatingPerson1").val();
